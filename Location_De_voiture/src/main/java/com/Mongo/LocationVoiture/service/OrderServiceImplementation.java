@@ -19,14 +19,34 @@ import java.util.List;
 @Service
 public class OrderServiceImplementation implements OrderService{
     @Autowired
-    private OrderRepo orderRepo;
+    private OrderRepo orderRepository;
 
     @Autowired
     private MongoTemplate mongoTemplate;
 
     @Override
-    public Page<Order> search(String id, Statue state, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+    public Page<Order> search(String id,Statue state, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        Query query = new Query().with(pageable);
+        List<Criteria> criteria = new ArrayList<>();
+        if (id != null) {
+            criteria.add(Criteria.where("id").is(id));
+        }
+        if (state != null) {
+            criteria.add(Criteria.where("state").is(state));
+        }
+        if(startDate != null && endDate != null){
+            criteria.add(Criteria.where("startDate").is(startDate).and("endDate").is(endDate));
+        }
+        if(!criteria.isEmpty()){
+            query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[0])));
+        }
 
-	    return null;
+        Page<Order> orders = PageableExecutionUtils.getPage(
+                mongoTemplate.find(query, Order.class),
+                pageable,
+                () -> mongoTemplate.count(query.skip(0).limit(0), Order.class));
+
+
+        return orders;
     }
 }

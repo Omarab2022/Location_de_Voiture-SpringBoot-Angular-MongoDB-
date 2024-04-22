@@ -1,1 +1,55 @@
-<h1>voir car details apres affichage des cars by dates</h1>
+<body>
+
+    <div class="card-wrapper">
+        <div class="card">
+            <!-- card left -->
+            <div class="product-imgs">
+                <div class="img-display">
+                    <div class="img-showcase">
+                        <img style="height: 500px;" src="assets/images/{{car.image}}" alt="shoe image">
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- card right -->
+            <div class="product-content">
+                <h2 class="product-title">{{car?.brand}}</h2>
+                <a href="#" class="product-link">{{car?.model}}</a>
+
+
+                <div class="product-price">
+
+                    <p class="new-price"> Price: <span>{{car?.pricePerDay}} Dh </span>/ Moie </p>
+                </div>
+
+                <div class="product-detail">
+                    <h2>about this Car: </h2>
+
+                    <p>{{car?.description}}</p>
+
+                    <ul>
+
+
+                        <li>Available: <span>{{car?.available ?
+                                'Available' : 'Out of Stock'}}</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="purchase-info">
+
+                    <button type="button" class="btn">
+                        Ajouter Un Client <i class="fas fa-add"></i>
+                    </button>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>

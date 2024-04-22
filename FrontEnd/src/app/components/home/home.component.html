@@ -1,1 +1,110 @@
-<h1> home : ajouter reservation / dashbord ...</h1>
+<div>
+
+    <section class="home" id="home">
+        <div class="text">
+            <h1><span>Bonjour</span><br>Réservez une voiture</h1>
+
+            <br><br>
+        </div>
+        <div class="form-container">
+            <form (ngSubmit)="onSubmit()">
+
+                <div class="input-box">
+                    <span><b>Start Date</b></span>
+                    <input type="date" class="form-control" id="startDate" required [(ngModel)]="startDate"
+                        name="startDate">
+                </div>
+                <div class="input-box">
+                    <span><b>End Date</b></span>
+                    <input type="date" class="form-control" id="endDate" required [(ngModel)]="endDate" name="endDate">
+                </div>
+
+
+                <input type="submit" name="" id="" class="btn">
+            </form>
+        </div>
+
+    </section>
+
+
+</div>
+<section class="category section pt-3 pb-0" style="margin-top: 100px;margin-bottom: 50px;">
+    <div class="container">
+        <div class="row justify-content-center "> <!-- Centrer la rangée -->
+            <div class="col-sm-6 col-xl-3 mb-4 mr-4 ml-4 "> <!-- Ajouter des marges à droite et à gauche -->
+                <div class="card first">
+                    <div class="card-heading p-4">
+                        <div class="mini-stat-icon float-right">
+                            <img src="../../../assets/images/client_6009864.png" alt=""><!-- User icon -->
+                        </div>
+                        <div>
+                            <h5 class="font-16">Nos Clients</h5>
+                        </div>
+                        <h3 class="mt-4">{{nbClient}}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-4 mr-4 ml-4 "> <!-- Ajouter des marges à droite et à gauche -->
+                <div class="card second">
+                    <div class="card-heading p-4">
+                        <div class="mini-stat-icon float-right">
+                            <img src="../../../assets/images/money-bag_2108625.png" alt="">
+                        </div>
+                        <div>
+                            <h5 class="font-16">Nos Bénéfices</h5>
+                        </div>
+                        <h3 class="mt-4">{{totalRevenue }} Dh</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-4 mr-4 ml-4 "> <!-- Ajouter des marges à droite et à gauche -->
+                <div class="card third">
+                    <div class="card-heading p-4">
+                        <div class="mini-stat-icon float-right">
+                            <img src="../../../assets/images/car_741407.png" alt="">
+                        </div>
+                        <div>
+                            <h5 class="font-16">Nos Voitures</h5>
+                        </div>
+                        <h3 class="mt-4">{{nbCars}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <section class="section products-main">
+            <div class="container">
+                <div class="title text-center">
+                    <h2>Ordres Par Mois</h2>
+                </div>
+                <div class="row">
+                    <canvas id="myChart" height="440px"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="section products-main">
+            <div class="container">
+                <div class="title text-center">
+                    <h2>Orderes Par Etat</h2>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <canvas id="myChart1" style="max-width: 100%; height: auto;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+</div>

@@ -1,1 +1,72 @@
-<h1>voir all cars</h1>
+<section class="section featured-car" id="featured-car">
+    <div class="container">
+        <div class="title-wrapper">
+            <h2 class="h2 section-title">Our Cars</h2>
+            <a href="#" class="featured-car-link" onclick="event.preventDefault()">
+                <span>
+                    <button type="button" class="btn btn-primary" routerLink="/addcar">Add New
+                        Car</button>
+                </span>
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+            </a>
+        </div>
+
+        <!-- Car List -->
+        <ul class="featured-car-list">
+            <li *ngFor="let c of cars">
+                <div class="featured-car-card">
+                    <figure class="card-banner">
+                        <img src="../../../assets/images/{{c.image}}" alt="Toyota RAV4 2021" loading="lazy" width="440"
+                            height="300" class="w-100">
+                    </figure>
+                    <div class="card-content">
+                        <div class="card-title-wrapper">
+                            <h3 class="h3 card-title">
+                                <a href="#">{{c.brand}}</a>
+                            </h3>
+                            <data class="year">{{c.model}}</data>
+                        </div>
+                        <ul class="card-list">
+                            <li class="card-list-item"
+                                style="width: 320px; text-align: center; color: rgb(132, 132, 132);">
+                                <ion-icon name="people-outline"></ion-icon>
+                                <span class="card-item-text">Description : {{c.description}}</span>
+                            </li>
+                        </ul>
+                        <ul class="card-list">
+                            <li class="card-list-item" style="width: 500px;">
+                                <ion-icon name="speedometer-outline"></ion-icon>
+                                <span class="card-item-text">
+                                    Available :
+                                    {{c.available ?
+                                    'Available' : 'Out of Stock'}}
+                                </span>
+
+                            </li>
+                        </ul>
+                        <div class="card-price-wrapper">
+                            <p class="card-price">
+                                <strong>{{c.pricePerDay}} Dh</strong> / month
+                            </p>
+                            <div class="card-price-wrapper">
+                                <button (click)="deleteCar(c.id)" class="btn" aria-label="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button routerLink="/updatecar/{{c.id}}" (click)="editCar(c)" class="btn"
+                                    aria-label="Update">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+</section>

@@ -22,9 +22,81 @@ public class UserController {
     @Autowired
     private MongoTemplate mongoTemplate;
     @Autowired
-    private UserRepo userRepo;
+    private UserRepo userRepository;
+
+    @PostMapping("/addUser")
+    public String addUser(@RequestBody User user) {
+        user.setId(null);
+        mongoTemplate.insert(user);
+        return "User added successfully";
+    }
+    @GetMapping("/findAllManagers")
+    public List<User> getManagers() {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("role").is(Role.MANAGER));
+        return mongoTemplate.find(query, User.class);
+    }
+    @GetMapping("/findAllUsers")
+    public List<User> getUsers() {
+        return mongoTemplate.findAll(User.class);
+    }
+
+    @GetMapping("/findAllAdmins")
+    public List<User> getAdmins() {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("role").is(Role.ADMINISTRATEUR));
+        return mongoTemplate.find(query, User.class);
+    }
+
+    @PatchMapping("/updateUser/{id}")
+    public ResponseEntity<User> updateManager(@PathVariable("id") String id, @RequestBody User updatedManager) {
+        User existingManager = mongoTemplate.findById(id, User.class);
+        if (!Objects.equals(updatedManager.getLastName(), "")) {
+            assert existingManager != null;
+            existingManager.setLastName(updatedManager.getLastName());
+        }
+        if (!Objects.equals(updatedManager.getFirstName(), "")) {
+            assert existingManager != null;
+            existingManager.setFirstName(updatedManager.getFirstName());
+        }
+        if (!Objects.equals(updatedManager.getAddress(), "")) {
+            assert existingManager != null;
+            existingManager.setAddress(updatedManager.getAddress());
+        }
+        if (!Objects.equals(updatedManager.getEmail(), "")) {
+            assert existingManager != null;
+            existingManager.setEmail(updatedManager.getEmail());
+        }
+        if (!Objects.equals(updatedManager.getPhoneNumber(), "")) {
+            assert existingManager != null;
+            existingManager.setPhoneNumber(updatedManager.getPhoneNumber());
+        }
+        if (!Objects.equals(updatedManager.getMotDePasse(), "")) {
+            assert existingManager != null;
+            existingManager.setMotDePasse(updatedManager.getMotDePasse());
+        }
+        if (updatedManager.getRole() != null) {
+            assert existingManager != null;
+            existingManager.setRole(updatedManager.getRole());
+        }
+
+        assert existingManager != null;
+        mongoTemplate.save(existingManager);
+        return ResponseEntity.ok(existingManager);
+
+    }
 
 
+    @DeleteMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable("id") String id) {
+        User existingUser = mongoTemplate.findById(id, User.class);
+        if (existingUser != null) {
+            mongoTemplate.remove(existingUser);
+            return "Deleted User with id: " + existingUser.getId();
+        } else {
+            return "User not found";
+        }
+    }
     @GetMapping("/findUserIdByEmail/{email}")
     //give me function the id of the user with this email
     public String getUserId(@PathVariable String email){
@@ -32,6 +104,32 @@ public class UserController {
         return user.getId();
     }
 
+    @GetMapping("/statistics")
+    public Map<String, Object> getStatistics() {
+        List<String> month = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+        Map<String, Object> statistics = new HashMap<>();
+        statistics.put("nbClients", mongoTemplate.findAll(Client.class).size());
+        statistics.put("nbCars", mongoTemplate.findAll(Car.class).size());
+        statistics.put("nbManagers", mongoTemplate.find(new Query(Criteria.where("role").is(Role.MANAGER)), User.class).size());
+        statistics.put("nbOrders", mongoTemplate.findAll(Order.class).size());
+        statistics.put("nbOrdersInHold", mongoTemplate.find(new Query(Criteria.where("State").is(Statue.EnAttente)), Order.class).size());
+        statistics.put("nbOrdersAccepted", mongoTemplate.find(new Query(Criteria.where("State").is(Statue.Accepte)), Order.class).size());
+        statistics.put("nbOrdersRefused", mongoTemplate.find(new Query(Criteria.where("State").is(Statue.Refuse)), Order.class).size());
+        Map<String, Integer> nbOrdersByMonth = new HashMap<>();
+        for (String m : month) {
+            nbOrdersByMonth.put(m, 0);
+        }
+
+        List<Order> orders = mongoTemplate.findAll(Order.class);
+        for (Order order : orders) {
+            int monthValue = order.getStartDate().getMonthValue();
+            String monthStr = String.format("%02d", monthValue);
+            nbOrdersByMonth.put(monthStr, nbOrdersByMonth.get(monthStr) + 1);
+        }
+
+        statistics.put("nbOrdersByMonth", nbOrdersByMonth);
+        return statistics;
+    }
 
     @GetMapping("/checkEmailExist/{email}")
     public boolean checkEmailExist(@PathVariable("email") String email) {
@@ -42,7 +140,7 @@ public class UserController {
 
     @RequestMapping("/user")
     public User getUserDetailsAfterLogin(Authentication authentication) {
-        User user = userRepo.findByEmail(authentication.getName());
+        User user = userRepository.findByEmail(authentication.getName());
         System.out.println(user);
         return user;
 

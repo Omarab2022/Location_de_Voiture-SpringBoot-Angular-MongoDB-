@@ -1,0 +1,49 @@
+<body>
+    <section class="container">
+        <header>Edit Car</header>
+        <form (ngSubmit)="updateCar()" #editCarForm="ngForm" class="form">
+            <div class="input-box">
+
+                <label for="model">Model</label>
+                <input type="text" id="model" required [(ngModel)]="car.model" name="model">
+            </div>
+
+            <div class="input-box">
+                <label for="brand">Brand</label>
+                <input type="text" id="brand" required [(ngModel)]="car.brand" name="brand">
+            </div>
+
+            <div class="input-box">
+                <label for="description">Description</label>
+                <input type="text" id="description" required [(ngModel)]="car.description" name="description">
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label for="pricePerDay">Price Per Day</label>
+                    <input type="number" id="pricePerDay" required [(ngModel)]="car.pricePerDay" name="pricePerDay">
+                </div>
+
+                <div class="input-box">
+                    <label for="available">Available</label>
+                    <input type="checkbox" id="available" [(ngModel)]="car.available" name="available">
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label for="start_Date">Start Date</label>
+                <input type="date" id="start_Date" [(ngModel)]="car.start_Date" name="start_Date">
+            </div>
+
+            <div class="input-box">
+                <label for="end_Date">End Date</label>
+                <input type="date" id="end_Date" [(ngModel)]="car.end_Date" name="end_Date">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Update</button>
+
+            </div>
+        </form>
+    </section>
+</body>

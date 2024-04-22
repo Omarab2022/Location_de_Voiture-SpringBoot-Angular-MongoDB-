@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { LoginComponent } from './components/login/login.component';
+
 import { RouterModule, Routes } from '@angular/router';
 import { GestionClientComponent } from './components/gestion-client/gestion-client.component';
 import { DataTablesModule } from 'angular-datatables';
@@ -26,6 +28,9 @@ import { OrdersRefusedComponent } from './components/orders-refused/orders-refus
 import { RouterguardGuard } from './routerguard.guard';
 import { AppRequestInterceptor } from './interceptors/app-request.interceptor';
 import { LogoutComponent } from './components/logout/logout.component';
+import { IonicModule } from '@ionic/angular';
+import { AjouterCarComponent } from './components/ajouter-car/ajouter-car.component';
+import { UpdateCarComponent } from './update-car/update-car.component';
 const routes: Routes = [
   { path:"", component:HomeComponent ,canActivate:[RouterguardGuard] },
 
@@ -47,6 +52,9 @@ const routes: Routes = [
   {path:"carDetail/:id/:Ddebut/:Dfin",component:CarDetaiComponent,canActivate:[RouterguardGuard] },
   {path:"ordersAccepted",component:OrdersAcceptedComponent,canActivate:[RouterguardGuard] },
   {path:"ordersRefused",component:OrdersRefusedComponent,canActivate:[RouterguardGuard] },
+  {path:"addcar",component:AjouterCarComponent,canActivate:[RouterguardGuard] },
+  { path:"updatecar/:id", component:UpdateCarComponent,canActivate:[RouterguardGuard] },
+
   {path: "logout", component: LogoutComponent},
 
   //{ path:"**", redirectTo:"/login", pathMatch:"full"}
@@ -57,6 +65,7 @@ export const routing = RouterModule.forRoot(routes);
 @NgModule({
   declarations: [
    AppComponent,
+   HomeComponent,
    HeaderComponent,
    LogoutComponent,
    CarByDateComponent,
@@ -71,8 +80,9 @@ export const routing = RouterModule.forRoot(routes);
    GestionManagerComponent,
    GestionClientComponent,
    DashboardComponent,
-   
-
+   CarsComponent,
+   AjouterCarComponent,
+   UpdateCarComponent
 
   ],
   imports: [
@@ -88,6 +98,7 @@ export const routing = RouterModule.forRoot(routes);
       cookieName: 'XSRF-TOKEN',
       headerName: 'X-XSRF-TOKEN',
     }),
+    IonicModule
   ],  exports: [RouterModule],
 
   providers: [{
@@ -100,3 +111,4 @@ export const routing = RouterModule.forRoot(routes);
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

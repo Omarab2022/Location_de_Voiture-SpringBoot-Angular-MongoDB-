@@ -23,66 +23,79 @@ import java.util.List;
 
 @RequestMapping("/order")
 public class OrderController {
-    @Autowired
-    private OrderRepo orderRepo;
+	@Autowired
+	private OrderRepo orderRepository;
 
-    @Autowired
-    private CarRepo carRepository;
+	@Autowired
+	private CarRepo carRepository;
 
-    @Autowired
-    private OrderService orderService;
+	@Autowired
+	private OrderService orderService;
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+	@Autowired
+	private MongoTemplate mongoTemplate;
 
-    @GetMapping("/all")
-    public List<Order> getAll() {
+	@GetMapping("/all")
+	public List<Order> getAll() {
+		return orderRepository.findAll();
+	}
+	@PostMapping("/addOrder")
+	public String saveOrder(@RequestBody Order order) {
+		orderRepository.save(order);
+		return "Added Order with id : " + order.getId();
+	}
+	@GetMapping("/allOrders")
+	public List<Order> getOrders() {
+		return orderRepository.findAll();
+	}
+	@GetMapping("/search")
+	public Page<Order> search(
+			@RequestParam(required = false) String id,
+			@RequestParam(required = false) Statue State,
+			@RequestParam(required = false) LocalDate startDate,
+			@RequestParam(required = false) LocalDate endDate,
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "5") Integer size){
+		Pageable pageable = PageRequest.of(page, size);
 
-	    return null;
-    }
+		return orderService.search(id,State, startDate, endDate, pageable);
+	}
+	@GetMapping("/orderSingle/{id}")
+	public Order getOrder(@PathVariable String id) {
+		return orderRepository.findById(id).orElse(null);
+	}
 
-    @PostMapping("/addOrder")
-    public String saveOrder(@RequestBody Order order) {
+	@PatchMapping("/updateState/{id}")
+	public String updateState(@PathVariable String id, @RequestBody Order order) {
+		if(order.getState() == Statue.Refuse){
 
-	    return null;
-    }
+			Car car = carRepository.findById(order.getCar().getId()).orElseThrow(() -> new IllegalArgumentException("Car not found"));
+			car.setAvailable(true);
+			carRepository.save(car);
+		}
+		Order order1 = orderRepository.findById(id).orElse(null);
+		order1.setState(order.getState());
+		orderRepository.save(order1);
+		return "Order updated";
+	}
+	@GetMapping("/ClientOrders/{id}")
 
-    @GetMapping("/allOrders")
-    public List<Order> getOrders() {
-
-	    return null;
-    }
-
-
-    @GetMapping("/search")
-    public Page<Order> search(){
-	    return null;
-    }
-    @GetMapping("/orderSingle/{id}")
-    public Order getOrder(@PathVariable String id) {
-	    return null;
-    }
-
-    @PatchMapping("/updateState/{id}")
-    public String updateState(@PathVariable String id, @RequestBody Order order) {
-	    return id;
-    }
-    @GetMapping("/ClientOrders/{id}")
-    public List<Order> getClientOrders(@PathVariable String id) {
-
-	    return null;
-    }
-    @GetMapping("/findAllOrdersInHold")
-    public List<Order> findAllOrdersInHold() {
-	    return null;
-    }
-    @GetMapping("/findAllOrdersAccepted")
-    public List<Order> findAllOrdersAccepted() {
-	    return null;
-    }
-    @GetMapping("/findAllOrdersRefused")
-    public List<Order> findAllOrdersRefused() {
-
-	    return null;
-    }
+	public List<Order> getClientOrders(@PathVariable String id) {
+		return orderRepository.findByClientId(id);
+	}
+	@GetMapping("/findAllOrdersInHold")
+	//use criteria to find orders in hold
+	public List<Order> findAllOrdersInHold() {
+		return mongoTemplate.find(Query.query(Criteria.where("State").is(Statue.EnAttente)), Order.class);
+	}
+	@GetMapping("/findAllOrdersAccepted")
+	//use criteria to find orders accepted
+	public List<Order> findAllOrdersAccepted() {
+		return mongoTemplate.find(Query.query(Criteria.where("State").is(Statue.Accepte)), Order.class);
+	}
+	@GetMapping("/findAllOrdersRefused")
+	//use criteria to find orders refused
+	public List<Order> findAllOrdersRefused() {
+		return mongoTemplate.find(Query.query(Criteria.where("State").is(Statue.Refuse)), Order.class);
+	}
 }

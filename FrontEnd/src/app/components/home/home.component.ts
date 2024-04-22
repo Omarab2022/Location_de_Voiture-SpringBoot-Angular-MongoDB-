@@ -17,8 +17,260 @@ Chart.register(...registerables);
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  constructor(private router:Router,private orderService: OrderService,private clientService: ClientService,private carService:CarServiceService,private adminService: AdminService) { }
+  startDate?:Date;
+  endDate?:Date;
+  orders?: Order[];
+  totalRevenue?:number;
+  clients!: Client[];
+  nbClient: number=0;
+  cars!:any;
+  nbCars!: number;
+  managers!: User[];
+  nbManagers!: number;
+  data: any;
+  ordersInHold?: Order[];
+  OrdersAccepted?: Order[];
+  ordersRefused?: Order[];
+  orderInHold?: number ;
+  orderRe?: number ;
+  orderAc?: number ;
+  nbCar:any;
+  
+  //Slider settings
+  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1} ;
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.getAllOrdersAccepted();
+    // this.getAllClient();
+    this.loadCars();
+    this.getAllUsers();
+    this.renderChart1();
+    //this.getNumberOfCars();
+    
+    this.carService.getData().subscribe({
+      next: (data) => {
+        this.data = data;
+        console.log(this.data); // Log the updated value of this.data
+        console.log(this.data.nbOrdersByMonth["01"]);
+        console.log(this.data.nbOrdersByMonth["06"]);
+        console.log(this.data.nbOrdersByMonth["07"]);
+        this.renderChart();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+  renderChart() {
+    new Chart("myChart", {
+      type: 'bar',
+      data: {
+        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+        datasets: [{
+          label: 'Number of Orders',
+          data: [
+            this.data.nbOrdersByMonth["01"],
+            this.data.nbOrdersByMonth["02"],
+            this.data.nbOrdersByMonth["03"],
+            this.data.nbOrdersByMonth["04"],
+            this.data.nbOrdersByMonth["05"],
+            this.data.nbOrdersByMonth["06"],
+            this.data.nbOrdersByMonth["07"],
+            this.data.nbOrdersByMonth["08"],
+            this.data.nbOrdersByMonth["09"],
+            this.data.nbOrdersByMonth["10"],
+            this.data.nbOrdersByMonth["11"],
+            this.data.nbOrdersByMonth["12"]
+          ],
+          backgroundColor: '#ff91a7',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1,
+          borderRadius:30,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Month',
+              font: {
+                size: 16
+              }
+            },
+            ticks: {
+              font: {
+                size: 14
+              }
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Nombre des Orders',
+              font: {
+                size: 16
+              }
+            },
+            ticks: {
+              font: {
+                size: 14
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+
+  onSubmit():void{
+    console.log(this.startDate);
+    console.log(this.endDate);
+    this.router.navigate(['/carbydate', this.startDate, this.endDate]);
+  }
+  getAllOrdersAccepted(): void {
+    this.orderService.getAllOrdersAccepted().subscribe((orders) => {
+      this.orders = orders;
+      this.totalRevenue = 0; // Initialize totalRevenue to 0
+      for(let i = 0; i < this.orders.length; i++) {
+        this.totalRevenue += this.orders[i].totalCost;
+      }
+    });
+  }
+
+
+  // getAllClient(): void {
+  //   this.clientService.getAllClient().subscribe((clients) => {
+  //     this.clients = clients;
+  //     this.nbClient! = this.clients.length;
+  //   });
+  // }
+
+
+  loadCars():void {
+    this.carService.getAllCars()
+      .subscribe(
+        data => {
+          this.cars! = data;
+          this.nbCars! = this.cars.length;
+        }
+      );
+
+  }
+  getAllUsers(): void {
+    this.adminService.getAllUsers().subscribe((users) => {
+      this.managers = users;
+      this.nbManagers = 0;
+      for(let i = 0; i < this.managers.length; i++) {
+        if(this.managers[i].role == "MANAGER") {
+          this.nbManagers++;
+        }
+      }
+    });
+  }
+  async renderChart1(): Promise<void> {
+    await Promise.all([
+        this.getAllOrdersInHold(),
+        this.getAllOrdersAccepted1(),
+        this.getAllOrdersRefused()
+    ]);
+
+    console.log(this.orderInHold);
+    console.log(this.orderAc);
+    console.log(this.orderRe);
+    
+    new Chart("myChart1", {
+        type: 'doughnut', // Changer le type de graphique en "doughnut"
+        data: {
+            labels: ['En Attente', 'ACCEPTED', 'REFUSED'],
+            datasets: [{
+                label: 'Number of Orders',
+                data: [this.orderInHold, this.orderAc, this.orderRe],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom', // Position de la légende
+                    labels: {
+                        boxWidth: 15 // Taille de la boîte de la légende
+                    }
+                },
+                
+            }
+        }
+    });
+}
+
+
+   renderChart2(){
+
+    new Chart("myChart2", {
+      type: 'pie',
+      data: {
+        labels: [
+          'AVAILABLE',
+          'NOT AVAILABLE',
+          
+        ],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [this.nbCar['available'], this.nbCar['unavailable']],
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+          ],
+          // hoverOffset: 4
+        }]
+      }
+    });
+  }
+
+  getAllOrdersRefused(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      this.orderService.getAllOrdersrefused().subscribe((orders) => {
+        this.ordersRefused = orders;
+        this.orderRe = this.ordersRefused.length;
+        resolve();
+      });
+    });
+  }
+
+  getAllOrdersAccepted1(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      this.orderService.getAllOrdersAccepted().subscribe((orders) => {
+        this.OrdersAccepted = orders;
+        this.orderAc = this.OrdersAccepted.length;
+        resolve();
+      });
+    });
+  }
+
+  getAllOrdersInHold(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      this.orderService.getAllOrdersInHold().subscribe((orders) => {
+        this.ordersInHold = orders;
+        this.orderInHold = this.ordersInHold.length;
+        resolve();
+      });
+    });
   }
 
   

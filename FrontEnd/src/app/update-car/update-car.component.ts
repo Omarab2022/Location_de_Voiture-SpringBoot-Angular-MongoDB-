@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/entities/car';
 import { CarServiceService } from 'src/app/services/car-service.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
-
 @Component({
-  selector: 'app-cars',
-  templateUrl: './cars.component.html',
-  styleUrls: ['./cars.component.css']
+  selector: 'app-update-car',
+  templateUrl: './update-car.component.html',
+  styleUrls: ['./update-car.component.css']
 })
-export class CarsComponent implements OnInit {
+export class UpdateCarComponent implements OnInit {
+
   cars :any;
   carId?: string ;
   car: Car = {
@@ -25,7 +25,7 @@ export class CarsComponent implements OnInit {
     start_Date: new Date(),
     end_Date: new Date()
   };
- 
+
   editCar(car: Car) {
     this.car = { ...car }; // Set the selectedCar variable to the chosen car object
     this.carId=car.id
@@ -40,11 +40,21 @@ export class CarsComponent implements OnInit {
   }
   
   submitted = false;
-  constructor(private http:HttpClient, private router: Router, private carService :CarServiceService) { }
+  constructor(private http:HttpClient, private router: Router, private carService :CarServiceService , private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id !== null) {
+        this.carId = id;
+      } else {
+        // Gérer le cas où carId est null
+        console.error('Car ID is null.');
+      }
+    });
     this.loadCars();
   }
+  
 
   deleteCar(id:String):void{
     this.carService.delete(id).subscribe({
@@ -197,4 +207,5 @@ export class CarsComponent implements OnInit {
       }
     });
   }
+
 }

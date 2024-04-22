@@ -10,9 +10,28 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./orders-refused.component.css']
 })
 export class OrdersRefusedComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  
+  constructor(private orderService: OrderService,
+    private router: Router,
+    private httpClient: HttpClient) { }
+    orders?: Order[];
 
+  ngOnInit(): void {
+    this.getAllOrdersRefused();
+  }
+  getAllOrdersRefused(): void {
+    this.orderService.getAllOrdersrefused().subscribe((orders) => {
+      this.orders = orders;
+      setTimeout(() => {
+        $('#datatableexample').DataTable({
+          pagingType: 'full_numbers',
+          pageLength: 5,
+          processing: true,
+          lengthMenu: [5, 10, 25],
+        });
+      }, 1);
+      // }, error => console.error(error));
+    });
+  }
  
 }
