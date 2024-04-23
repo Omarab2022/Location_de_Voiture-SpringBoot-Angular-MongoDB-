@@ -11,10 +11,31 @@ import { ClientService } from 'src/app/services/client.service';
   styleUrls: ['./client-details.component.css']
 })
 export class ClientDetailsComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  constructor(private fb: FormBuilder,private clientService: ClientService, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute) { }
 
+  c: Client = new Client();
+  review:Review[]=new Array();
+  number: number = 0;
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      // Use the extracted ID as needed
+      console.log(id);
+    }); 
+    // this.getOneClient(this.route.snapshot.params['id']);
+  }
+  // getOneClient(id: string) {
+  //   this.clientService.getOneClient(id).subscribe((client) => {
+  //     console.log(client);
+  //     this.c = client;
+     
+  //   });
+  // }
+
+  // getStarRange(count: number): number[] {
+  //   return Array(count).fill(0).map((_, index) => index + 1);
+  // }
+  
 
   
 }

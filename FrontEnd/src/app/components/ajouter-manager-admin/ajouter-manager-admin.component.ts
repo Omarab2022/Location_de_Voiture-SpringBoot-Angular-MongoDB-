@@ -1,11 +1,12 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { User } from 'src/app/entities/user';
 import { AdminService } from 'src/app/services/admin.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 function passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
@@ -15,12 +16,14 @@ function passwordMatchValidator(control: AbstractControl): { [key: string]: bool
   return null;
 }
 
+
 @Component({
-  selector: 'app-gestion-manager',
-  templateUrl: './gestion-manager.component.html',
-  styleUrls: ['./gestion-manager.component.css']
+  selector: 'app-ajouter-manager-admin',
+  templateUrl: './ajouter-manager-admin.component.html',
+  styleUrls: ['./ajouter-manager-admin.component.css']
 })
-export class GestionManagerComponent implements OnInit {
+export class AjouterManagerAdminComponent implements OnInit {
+
   users?: User[];
   showEditForm: boolean = false;
   selectedId?: string;
@@ -74,19 +77,12 @@ export class GestionManagerComponent implements OnInit {
 
 
   onDelete(id: string) {
-    this.adminService.deleteUser(id).subscribe(() => {
+    this.adminService.deleteUser(id).subscribe((response) => {
+      console.log(response);
       this.getAllUsers();
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'User deleted successfully',
-        showConfirmButton: false,
-        timer: 1500
-      });
+      window.location.reload();
     });
   }
-
-  
   onSubmit() {
     console.log(this.editForm.value);
     if (this.editForm.invalid) {
@@ -148,7 +144,7 @@ export class GestionManagerComponent implements OnInit {
                     icon: 'success',
                     title: 'User added successfully',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 3500
                   });
                   window.location.reload();
                 }
@@ -163,7 +159,7 @@ export class GestionManagerComponent implements OnInit {
                   icon: 'success',
                   title: 'User added successfully',
                   showConfirmButton: false,
-                  timer: 1500
+                  timer: 3500
                 });
               }
               window.location.reload();
@@ -200,13 +196,4 @@ export class GestionManagerComponent implements OnInit {
       toggleEditForm() {
         this.showEditForm = true;
       }
- 
-      
-    }
-  
-  
-  
-
- 
-
-
+}

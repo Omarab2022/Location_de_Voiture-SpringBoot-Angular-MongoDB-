@@ -174,7 +174,7 @@ body {
 }
 
 .sidebar .side-menu li.active a {
-    color: var(--success);
+    color: rgb(255, 77, 0);
 }
 
 .sidebar.close .side-menu li a {

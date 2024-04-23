@@ -1,1 +1,63 @@
-<h1> voir client details apres clique sur client dans page de gestion client</h1>
+<!-- <section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <nav class="product-info-tabs wc-tabs mt-5 mb-5">
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                            role="tab" aria-controls="nav-home" aria-selected="true">Description</a>
+
+                    </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <h4>Client info</h4>
+
+                        <ul class="">
+                            <li>Full name : {{c.firstName}} {{c.lastName}}</li>
+                            <li>Email : {{c.email}}</li>
+                            <li>CIN : {{c.cin}}</li>
+                            <li>Phone : {{c.phoneNumber}}</li>
+                            <li>Address : {{c.address}}</li>
+
+                        </ul>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<div class="container">
+    <div class="card" data-tilt>
+        <div class="hero">
+            <img src="../../../assets/images/avatar-1.png" alt="A Guy" id="hero">
+            <h2>{{c.firstName}} {{c.lastName}}</h2>
+            <p>{{c.cin}}</p>
+
+        </div>
+
+        <p> Nom : {{c.firstName}}</p>
+        <p> Prenom : {{c.lastName}}</p>
+        <p> CIN : {{c.cin}}</p>
+        <p> Email : {{c.email}}</p>
+        <p> Phone : {{c.phoneNumber}}</p>
+
+
+
+        <div class="links">
+
+            <a href="#">
+                <div>
+                    <img src="../../../assets/images/jeep.jpeg" alt="Slack Logo">
+
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

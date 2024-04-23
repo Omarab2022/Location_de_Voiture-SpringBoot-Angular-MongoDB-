@@ -87,19 +87,7 @@ header {
     color: var(--main-color);
 }
 
-/* .form-container form{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-    position: absolute;
-    bottom: 4rem;
-    left: 100px;
-    background: #fff;
-    padding: 6px;
-    border-radius: 0.5rem; */
 
-/* } */
 .form-container form {
     display: grid;
     flex-wrap: wrap;
@@ -164,10 +152,28 @@ header {
 .header-btn a:hover {
     color: #ebecf0;
     border-radius: 40px;
-    background-color: #fe7a3dde;
+    background-color: #3da7fede;
     transition-duration: 0.3s;
     -webkit-border-radius: 40px;
     -moz-border-radius: 40px;
     -ms-border-radius: 40px;
     -o-border-radius: 40px;
+}
+
+.header-btn a {
+    color: #ebecf0;
+    border-radius: 40px;
+    background-color: #fe7a3dde;
+    transition-duration: 0.3s;
+    margin-right: 5px;
+
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+}
+
+.header-btn a.active {
+    background-color: #2da0ffde;
+    color: white;
 }

@@ -10,7 +10,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   styleUrls: ['./car-detai.component.css']
 })
 export class CarDetaiComponent implements OnInit {
- 
   id:string ='';
   car ?: any;
   cin: any;
@@ -43,6 +42,21 @@ export class CarDetaiComponent implements OnInit {
       }
     });
   }
+
+   // Suppose you have car object defined here
+  showForm: boolean = false; // Initialize showForm variable
+
+  // Function to show the reservation form
+  showReservationForm() {
+    this.showForm = true;
+  }
+
+  // Function to hide the reservation form
+  hideReservationForm() {
+    this.showForm = false;
+  }
+
+
   calculateCost():number{
     let date1 = new Date(this.Ddebut);
     let date2 = new Date(this.Dfin);

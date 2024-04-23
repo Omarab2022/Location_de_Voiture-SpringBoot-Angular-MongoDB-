@@ -1,1 +1,70 @@
-<h1>gestion des manager et admin : add / update / delete</h1>
+<section style="margin-bottom: 300px;" class="section products-main">
+    <div class="container" style="margin-bottom: 80px;">
+
+
+        <div style="margin-bottom: 50px;" class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="title text-center">
+                    <h2 class="title">Nos Managers & Admin</h2>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="table-responsive">
+            <table style="border: 2px solid rgb(188, 188, 188); " class="table table-bordered no-wrap v-middle mb-0">
+                <!-- Vos en-têtes de tableau -->
+                <thead>
+                    <tr style="text-align: center;">
+                        <th class="font-14 font-weight-medium text-muted">Nom & Prénom</th>
+                        <th class="font-14 font-weight-medium text-muted px-2">Email</th>
+                        <th class="font-14 font-weight-medium text-muted">Phone</th>
+                        <th class="font-14 font-weight-medium text-muted text-center">Role</th>
+                        <th class="font-14 font-weight-medium text-muted text-center">Address</th>
+                        <th class="font-14 font-weight-medium text-muted">Update</th>
+                        <th class="font-14 font-weight-medium text-muted">Delete</th>
+                    </tr>
+                </thead>
+                <!-- Vos lignes de tableau -->
+                <tbody>
+                    <tr style="text-align: center;" *ngFor="let c of users">
+                        <td class="border-top-0 text-muted px-2 py-4 font-14">{{ c.firstName }} {{ c.lastName }}</td>
+                        <td class="border-top-0 text-muted px-2 py-4 font-14">{{ c.email }}</td>
+                        <td class="border-top-0 text-muted px-2 py-4 font-14">{{ c.phoneNumber }}</td>
+                        <td class="border-top-0 px-2 py-4">
+                            <div class="popover-icon">
+                                <button [class]="getClassForRole(c.role)">{{ c.role }}</button>
+                            </div>
+                        </td>
+                        <td class="border-top-0 text-muted px-2 py-4 font-14">{{ c.address }}</td>
+                        <td class="border-top-0 text-center font-weight-medium text-muted px-2 py-4">
+                            <button type="button" class="btn btn-primary" routerLink="/form-edit-user/{{ c.id }}">
+                                Update
+                            </button>
+                        </td>
+                        <td class="border-top-0 text-center font-weight-medium text-muted px-2 py-4">
+                            <button type="button" class="btn btn-danger" (click)="onDelete(c.id!)">
+                                Supprimer
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+
+    <div class="row justify-content-center mb-3"> <!-- Nouvelle ligne pour centrer le bouton -->
+        <div class="col-lg-8 text-center"> <!-- Colonne pour centrer horizontalement -->
+            <button type="button" class="btn btn-primary add" routerLink="/AjouterManagerAdmin">
+                Ajouter Manager Or Admin
+            </button>
+        </div>
+    </div>
+
+
+</section>

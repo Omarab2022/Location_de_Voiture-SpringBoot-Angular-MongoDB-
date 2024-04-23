@@ -2,11 +2,14 @@
   <a href="/" class="logo"><img src="../../../assets/images/jeep.jpeg" alt="GoDrive"></a>
 
   <div class="header-btn">
-    <a routerLink="/">Home</a>
-    <a routerLink="/cars">Cars</a>
-    <a routerLink="/gestion-client">Clients</a>
-    <a routerLink="/dashboard">Orders</a>
-    <a *ngIf="userTemp.role=='ADMINISTRATEUR'" routerLink="/gestion-manager">Users</a>
+    <a [routerLink]="'/'" (click)="setActiveLink('/')" [ngClass]="{ 'active': activeLink === '/' }">Home</a>
+    <a [routerLink]="'/cars'" (click)="setActiveLink('/cars')" [ngClass]="{ 'active': activeLink === '/cars' }">Cars</a>
+    <a [routerLink]="'/gestion-client'" (click)="setActiveLink('/gestion-client')"
+      [ngClass]="{ 'active': activeLink === '/gestion-client' }">Clients</a>
+    <a [routerLink]="'/dashboard'" (click)="setActiveLink('/dashboard')"
+      [ngClass]="{ 'active': activeLink === '/dashboard' }">Orders</a>
+    <a *ngIf="userTemp.role=='ADMINISTRATEUR'" [routerLink]="'/gestion-manager'"
+      (click)="setActiveLink('/gestion-manager')" [ngClass]="{ 'active': activeLink === '/gestion-manager' }">Users</a>
     <a href="/logout" class="logout">Logout</a>
   </div>
 </header>

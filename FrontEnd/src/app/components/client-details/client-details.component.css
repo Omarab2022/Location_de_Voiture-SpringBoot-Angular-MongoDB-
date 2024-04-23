@@ -1,0 +1,99 @@
+.container {
+    width: 1900px;
+    height: 89vh;
+    border-radius: 30px;
+    background-color: #e8681e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+
+.card {
+    width: 800px;
+
+    color: #afafaf;
+    text-align: center;
+    padding: 35px 0;
+    background-color: #a43013c1;
+    border-radius: 25px;
+    box-shadow: 2px 4px 30px #ffb6b6;
+    /* backdrop-filter: blur(5px); = to make the background directly underneath the card blurry (useful when it's a transparent/ glassmorphism card */
+}
+
+.card .hero img {
+    width: 140px;
+    border-radius: 50%;
+    border: 2px solid #f6a05e;
+    padding: 5px;
+}
+
+.card h2 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 17px;
+    margin-bottom: 0;
+    text-transform: capitalize;
+    color: #eae7e7;
+}
+
+.card p {
+    font-size: 18px;
+    margin: 7px auto;
+    max-width: 330px;
+    font-weight: bold;
+}
+
+.card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 30px auto;
+}
+
+
+
+
+.card .links h3 {
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 18px;
+    color: #eae7e7;
+    letter-spacing: .5px;
+}
+
+.card .links img {
+    width: 90px;
+    height: 70px;
+    border-radius: 50%;
+
+}
+
+.card .links a div>span {
+    color: #eae7e7;
+    font-style: Black;
+    font-family: 'Roboto', sans-serif;
+    line-height: 32px;
+    vertical-align: top;
+    font-size: 18px;
+}
+
+.logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9a01ae;
+}
+
+.logos .I4G {
+    width: 46.8px;
+    height: 30px;
+    margin: 0px 5px 0px;
+}
+
+.logos .zuri {
+    width: 60px;
+    height: 30px;
+}

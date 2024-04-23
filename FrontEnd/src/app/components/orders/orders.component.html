@@ -1,4 +1,4 @@
-<body style="margin-bottom: 250px;">
+<body style="margin-bottom: 300px;">
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -41,6 +41,69 @@
             <div class="bottom-data">
                 <div class="orders">
 
+
+                    <div class="table-responsive">
+                        <table class="table no-wrap v-middle mb-0">
+                            <thead>
+                                <tr class="border-0">
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Nom & Prenom</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Email</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">CIN</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Car</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Model</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Photo</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted">Total cost</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted text-center">Accepter</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted text-center">Refuser</th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted text-center">Voir Client
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let o of orders">
+                                    <td class="border-top-0">
+
+                                        {{ o.client.firstName }} {{ o.client.lastName }}
+
+                                    </td>
+                                    <td class="border-top-0">{{ o.client.email }}</td>
+                                    <td class="border-top-0">{{ o.client.cin }}</td>
+                                    <td class="border-top-0">{{ o.car.brand }} </td>
+                                    <td class="border-top-0">{{ o.car.model }}</td>
+                                    <td class="border-top-0"><img style="width: 40px;height: 40px;"
+                                            src="../../../assets/images/{{ o.car.image }}" alt="">
+                                    </td>
+                                    <td class="border-top-0">{{ o.totalCost }} Dh</td>
+                                    <td class="border-top-0 text-center">
+                                        <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-primary "
+                                            (click)="acceptOrder(o)">
+                                            Accepter
+                                        </button>
+
+                                    </td>
+                                    <td class="border-top-0 text-center">
+
+                                        <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-danger"
+                                            (click)="refuseOrder(o)">
+                                            Refuser
+                                        </button>
+                                    </td>
+                                    <td class="border-top-0 text-center">
+
+                                        <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-success"
+                                            routerLink="/client-details/{{o.client.id}}">
+                                            Voir
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
 
                 </div>

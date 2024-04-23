@@ -11,9 +11,10 @@
         <form (ngSubmit)="loginForm.valid && validateUser(loginForm)" #loginForm="ngForm">
           <div class="input-box">
             <span>Enter username</span>
-            <input type="email" name="email" id="email" placeholder="Email" required
-              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="model.email" #email="ngModel"
-              class="form-control" />
+            <input style="background-color: rgba(255, 132, 0, 0.529);height: 50px; text-align: center;
+            color: aliceblue;border-radius: 10px;width: 350px;" type="email" name="email" id="email"
+              placeholder="Email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="model.email"
+              #email="ngModel" class="form-control" />
             <span class="text-danger" *ngIf="(email.touched || loginForm.submitted) &&
                           email.errors?.['required']">Error : Email is required !</span>
             <span class="text-danger" *ngIf="(email.touched || loginForm.submitted) &&
@@ -21,8 +22,10 @@
           </div>
           <div class="input-box">
             <span>Enter Password</span>
-            <input type="password" name="password" placeholder="Password" id="password" required
-              [(ngModel)]="model.motDePasse" #password="ngModel" minlength="5" class="form-control" />
+            <input style="background-color: rgba(255, 132, 0, 0.529);height: 50px; text-align: center;
+            color: aliceblue;border-radius: 10px;width: 350px;" type="password" name="password" placeholder="Password"
+              id="password" required [(ngModel)]="model.motDePasse" #password="ngModel" minlength="5"
+              class="form-control" />
             <span class="text-danger" *ngIf="(password.touched || loginForm.submitted) &&
                           password.errors?.['required']">Error : Password is required !</span>
             <span class="text-danger" *ngIf="(password.touched || loginForm.submitted) &&

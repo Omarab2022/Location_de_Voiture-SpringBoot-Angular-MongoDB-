@@ -22,7 +22,6 @@ import { GestionManagerComponent } from './components/gestion-manager/gestion-ma
 import { FormEditUserComponent } from './components/form-edit-user/form-edit-user.component';
 import { CarsComponent } from './components/cars/cars.component';
 import { CarByDateComponent } from './components/car-by-date/car-by-date.component';
-import { CarDetaiComponent } from './components/car-detai/car-detai.component';
 import { OrdersAcceptedComponent } from './components/orders-accepted/orders-accepted.component';
 import { OrdersRefusedComponent } from './components/orders-refused/orders-refused.component';
 import { RouterguardGuard } from './routerguard.guard';
@@ -31,6 +30,9 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { IonicModule } from '@ionic/angular';
 import { AjouterCarComponent } from './components/ajouter-car/ajouter-car.component';
 import { UpdateCarComponent } from './update-car/update-car.component';
+import { CarDetaiComponent } from './components/car-detai/car-detai.component';
+import { AjouterManagerAdminComponent } from './components/ajouter-manager-admin/ajouter-manager-admin.component';
+
 const routes: Routes = [
   { path:"", component:HomeComponent ,canActivate:[RouterguardGuard] },
 
@@ -54,6 +56,7 @@ const routes: Routes = [
   {path:"ordersRefused",component:OrdersRefusedComponent,canActivate:[RouterguardGuard] },
   {path:"addcar",component:AjouterCarComponent,canActivate:[RouterguardGuard] },
   { path:"updatecar/:id", component:UpdateCarComponent,canActivate:[RouterguardGuard] },
+  { path:"AjouterManagerAdmin", component:AjouterManagerAdminComponent,canActivate:[RouterguardGuard] },
 
   {path: "logout", component: LogoutComponent},
 
@@ -65,6 +68,8 @@ export const routing = RouterModule.forRoot(routes);
 @NgModule({
   declarations: [
    AppComponent,
+   AjouterManagerAdminComponent,
+   CarDetaiComponent,
    HomeComponent,
    HeaderComponent,
    LogoutComponent,
@@ -82,7 +87,8 @@ export const routing = RouterModule.forRoot(routes);
    DashboardComponent,
    CarsComponent,
    AjouterCarComponent,
-   UpdateCarComponent
+   UpdateCarComponent,
+   AjouterManagerAdminComponent
 
   ],
   imports: [

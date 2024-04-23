@@ -28,5 +28,11 @@ export class HeaderComponent implements OnInit {
     }
     
   }
+
+  activeLink: string = '';
+  
+  setActiveLink(link: string) {
+    this.activeLink = link;
+  }
   
 }

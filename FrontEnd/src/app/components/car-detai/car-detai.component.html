@@ -7,49 +7,56 @@
                 <div class="img-display">
                     <div class="img-showcase">
                         <img style="height: 500px;" src="assets/images/{{car.image}}" alt="shoe image">
-
                     </div>
                 </div>
-
             </div>
             <!-- card right -->
             <div class="product-content">
                 <h2 class="product-title">{{car?.brand}}</h2>
                 <a href="#" class="product-link">{{car?.model}}</a>
-
-
                 <div class="product-price">
-
                     <p class="new-price"> Price: <span>{{car?.pricePerDay}} Dh </span>/ Moie </p>
                 </div>
-
                 <div class="product-detail">
                     <h2>about this Car: </h2>
-
                     <p>{{car?.description}}</p>
-
                     <ul>
-
-
-                        <li>Available: <span>{{car?.available ?
-                                'Available' : 'Out of Stock'}}</span></li>
-
+                        <li>Available: <span>{{car?.available ? 'Available' : 'Out of Stock'}}</span></li>
                     </ul>
                 </div>
-
                 <div class="purchase-info">
-
-                    <button type="button" class="btn">
-                        Ajouter Un Client <i class="fas fa-add"></i>
-                    </button>
-
+                    <button type="button" class="btn btn-primary" (click)="showReservationForm()">Choisir Un
+                        Client</button>
                 </div>
-
-
             </div>
         </div>
     </div>
 
+    <!-- Reservation Form -->
+    <div *ngIf="showForm" class="reservation-form">
+        <div class="form-container">
+            <form #reservationForm="ngForm" (ngSubmit)="makeOrder()">
+                <div class="form-group">
+                    <label class="form-label" for="cin">Svp Entrer CIN de Client</label>
+                    <input type="text" class="form-control" id="cin" required [(ngModel)]="cin" name="cin"
+                        (ngModelChange)="searchClient()">
+                </div>
+                <div *ngIf="client" class="client-info">
+                    <div class="client-image">
+                        <img src="../../../assets/images/avatar-1.png" alt="Photo du client">
+                    </div>
+                    <div class="client-details">
 
+                        <h3>Nom: {{client.lastName}}</h3>
+                        <h3>Prenom: {{client.firstName}}</h3>
+
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-secondary" (click)="hideReservationForm()">Close</button>
+            </form>
+        </div>
+    </div>
 
 </body>
