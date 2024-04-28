@@ -25,6 +25,8 @@ export class AjouterCarComponent implements OnInit {
     start_Date: new Date(),
     end_Date: new Date()
   };
+
+
   // selectedCar: Car = {
   //   id: '',
   //   model: '',
@@ -109,8 +111,8 @@ export class AjouterCarComponent implements OnInit {
           start_Date: new Date(),
           end_Date: new Date()
         };
-        this.loadCars(); // Refresh the car list
-        this.closeModal(); // Close the modal after submission
+        this.loadCars(); 
+        this.closeModal(); 
       },
       error : (error) => {
         console.error(error);
@@ -132,7 +134,7 @@ export class AjouterCarComponent implements OnInit {
     );
   }
   closeModal() {
-    // Reset the form and close the modal
+   
     this.submitted = false;
     this.car = {
       id:'',
@@ -170,8 +172,7 @@ export class AjouterCarComponent implements OnInit {
     }
     this.carService.updateCar(this.carId, this.car).subscribe({
       next: () => {
-        // Success
-        // Reset the car object and close the modal
+        
         this.car = {
           id: '',
           model: '',
@@ -190,7 +191,7 @@ export class AjouterCarComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        // Error handling
+       
         console.error('Failed to update car:', error);
         if(error.status == 200){
           Swal.fire({
