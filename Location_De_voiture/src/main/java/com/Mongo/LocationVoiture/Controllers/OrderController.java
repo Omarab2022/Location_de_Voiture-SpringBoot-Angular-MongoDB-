@@ -84,17 +84,14 @@ public class OrderController {
 		return orderRepository.findByClientId(id);
 	}
 	@GetMapping("/findAllOrdersInHold")
-	//use criteria to find orders in hold
 	public List<Order> findAllOrdersInHold() {
 		return mongoTemplate.find(Query.query(Criteria.where("State").is(Statue.EnAttente)), Order.class);
 	}
 	@GetMapping("/findAllOrdersAccepted")
-	//use criteria to find orders accepted
 	public List<Order> findAllOrdersAccepted() {
 		return mongoTemplate.find(Query.query(Criteria.where("State").is(Statue.Accepte)), Order.class);
 	}
 	@GetMapping("/findAllOrdersRefused")
-	//use criteria to find orders refused
 	public List<Order> findAllOrdersRefused() {
 		return mongoTemplate.find(Query.query(Criteria.where("State").is(Statue.Refuse)), Order.class);
 	}
