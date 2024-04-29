@@ -32,6 +32,8 @@ import { AjouterCarComponent } from './components/ajouter-car/ajouter-car.compon
 import { UpdateCarComponent } from './update-car/update-car.component';
 import { CarDetaiComponent } from './components/car-detai/car-detai.component';
 import { AjouterManagerAdminComponent } from './components/ajouter-manager-admin/ajouter-manager-admin.component';
+import { AjouterClientComponent } from './components/ajouter-client/ajouter-client.component';
+
 
 const routes: Routes = [
   { path:"", component:HomeComponent ,canActivate:[RouterguardGuard] },
@@ -41,7 +43,6 @@ const routes: Routes = [
   { path:"login", component:LoginComponent  },
   { path:"orders", component:OrdersComponent ,canActivate:[RouterguardGuard] },
 
-  // { path:"product-single/:id", component:ProductsingleComponent },
   { path:"gestion-client", component:GestionClientComponent,canActivate:[RouterguardGuard] },
 
 
@@ -57,8 +58,10 @@ const routes: Routes = [
   {path:"addcar",component:AjouterCarComponent,canActivate:[RouterguardGuard] },
   { path:"updatecar/:id", component:UpdateCarComponent,canActivate:[RouterguardGuard] },
   { path:"AjouterManagerAdmin", component:AjouterManagerAdminComponent,canActivate:[RouterguardGuard] },
-
   {path: "logout", component: LogoutComponent},
+  { path:"editclient/:id", component:FormEditComponent,canActivate:[RouterguardGuard] },
+  { path:"ajouterclient", component:AjouterClientComponent,canActivate:[RouterguardGuard] },
+
 
   //{ path:"**", redirectTo:"/login", pathMatch:"full"}
 ];
@@ -88,12 +91,13 @@ export const routing = RouterModule.forRoot(routes);
    CarsComponent,
    AjouterCarComponent,
    UpdateCarComponent,
-   AjouterManagerAdminComponent
+   AjouterManagerAdminComponent,
+   AjouterClientComponent,
+
 
   ],
   imports: [
     BrowserModule,
-    SlickCarouselModule,
     RouterModule.forRoot(routes),
     DataTablesModule,
   HttpClientModule,

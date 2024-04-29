@@ -328,7 +328,7 @@ a {
   border: 1px solid var(--white);
   border-radius: 20px;
   padding: 10px;
-  box-shadow: 5px -5px 7px hsl(29.52deg 100% 53% / 36%);
+  box-shadow: 5px -5px 7px hsla(200, 100%, 61%, 0.207);
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;

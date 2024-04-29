@@ -22,19 +22,19 @@ export class ClientDetailsComponent implements OnInit {
       // Use the extracted ID as needed
       console.log(id);
     }); 
-    // this.getOneClient(this.route.snapshot.params['id']);
+    this.getOneClient(this.route.snapshot.params['id']);
   }
-  // getOneClient(id: string) {
-  //   this.clientService.getOneClient(id).subscribe((client) => {
-  //     console.log(client);
-  //     this.c = client;
+  getOneClient(id: string) {
+    this.clientService.getOneClient(id).subscribe((client) => {
+      console.log(client);
+      this.c = client;
      
-  //   });
-  // }
+    });
+  }
 
-  // getStarRange(count: number): number[] {
-  //   return Array(count).fill(0).map((_, index) => index + 1);
-  // }
+  getStarRange(count: number): number[] {
+    return Array(count).fill(0).map((_, index) => index + 1);
+  }
   
 
   

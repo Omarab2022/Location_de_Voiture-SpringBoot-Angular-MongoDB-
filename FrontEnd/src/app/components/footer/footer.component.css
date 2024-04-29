@@ -913,7 +913,7 @@ a {
 
 .footer-bottom {
     background: var(--gradient);
-    border: 1px solid var(--white);
+
     border-radius: var(--radius-18) var(--radius-18) 0 0;
     padding: 20px;
 }

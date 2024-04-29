@@ -1,33 +1,27 @@
-import { ClientService } from './../../services/client.service';
+
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'src/app/entities/client';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Client } from 'src/app/entities/client';
+import { ClientService } from 'src/app/services/client.service';
+import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { ElementRef } from '@angular/core';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-gestion-client',
-  templateUrl: './gestion-client.component.html',
-  styleUrls: ['./gestion-client.component.css'],
+  selector: 'app-ajouter-client',
+  templateUrl: './ajouter-client.component.html',
+  styleUrls: ['./ajouter-client.component.css']
 })
-export class GestionClientComponent implements OnInit {
+export class AjouterClientComponent implements OnInit {
   clients?: Client[];
   showEditForm: boolean = false;
   selectedId?: string;
-  // Ajoutez une référence au modal
-  modal: any;
-
-  constructor(
-    private fb: FormBuilder,
-    private clientService: ClientService,
-    private router: Router,
-    private httpClient: HttpClient,
-    private elRef: ElementRef // Ajoutez ceci
-  ) {}
+  constructor(private fb: FormBuilder,private clientService: ClientService, private router: Router,private httpClient:HttpClient) {}
   editForm = this.fb.group({
     id: [''],
     email: ['', [Validators.required, Validators.email]],
@@ -35,24 +29,14 @@ export class GestionClientComponent implements OnInit {
     lastname: ['', Validators.required],
     cin: ['', Validators.required],
     phone: ['', Validators.required],
-
+    
   });
   ngOnInit(): void {
-     // Récupérez la référence au modal
-     this.modal = this.elRef.nativeElement.querySelector('#myModal');
     this.getAllClient();
   }
-
- 
-  openModal() {
-    this.modal.style.display = "block";
-  }
-
-  // Méthode pour fermer le modal
-  closeModal() {
-    this.modal.style.display = "none";
-  }
-
+  // //get request from web api
+  // this.ClientService.getAllClient.subscribe(data => {
+  //   this.data =data;
   getAllClient(): void {
     this.clientService.getAllClient().subscribe((clients) => {
       this.clients = clients;
@@ -64,25 +48,36 @@ export class GestionClientComponent implements OnInit {
           lengthMenu: [5, 10, 25],
         });
       }, 1);
+      // }, error => console.error(error));
     });
   }
-
   onDelete(id: string) {
     this.clientService.deleteClient(id).subscribe((response) => {
       console.log(response);
       this.getAllClient();
+      window.location.reload();
+    });
+  }
+  onEdit(id: string) {
+    this.clientService.deleteClient(id).subscribe((response) => {
+      console.log(response);
+      this.getAllClient();
+      window.location.reload();
     });
   }
 
+  
   onSubmit() {
+    console.log(this.editForm.value);
     if (this.editForm.invalid) {
       this.editForm.markAllAsTouched();
       return;
     }
-
+  
     const email = this.editForm.value.email!;
     const cin = this.editForm.value.cin!;
-
+  
+    // Check if email or cin already exist
     this.clientService.checkEmailExists(email).subscribe((emailExists) => {
       if (emailExists) {
         Swal.fire({
@@ -92,7 +87,7 @@ export class GestionClientComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
-        return;
+        window.location.reload();
       } else {
         this.clientService.checkCinExists(cin).subscribe((cinExists) => {
           if (cinExists) {
@@ -103,7 +98,7 @@ export class GestionClientComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500
             });
-            return;
+            window.location.reload();
           } else {
             let client = new Client();
             client.email = email;
@@ -111,10 +106,11 @@ export class GestionClientComponent implements OnInit {
             client.lastName = this.editForm.value.lastname!;
             client.phoneNumber = this.editForm.value.phone!;
             client.cin = cin;
-
+  
             this.clientService.add(client).pipe(
               catchError((error: HttpErrorResponse) => {
                 console.error('HTTP Error:', error.status, error.statusText);
+                // Handle error response if necessary
                 if (error.status === 500) {
                   Swal.fire({
                     position: 'center',
@@ -123,12 +119,34 @@ export class GestionClientComponent implements OnInit {
                     showConfirmButton: false,
                     timer: 1500
                   });
+                  window.location.reload();
                 }
+                if(error.status === 404){
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Not found',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  window.location.reload();
+                }
+                if(error.status === 200){
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Client added successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  window.location.reload();
+                }
+                
+                
                 return throwError('Something went wrong. Please try again later.');
               })
             ).subscribe((response) => {
-              if (response && response.id) {
-                // Affichage d'une popup de succès avec SweetAlert
+              if (response.cin !== null && response.email !== null && response.firstName !== null && response.lastName !== null && response.phoneNumber !== null && response.id) {
                 Swal.fire({
                   position: 'center',
                   icon: 'success',
@@ -136,22 +154,16 @@ export class GestionClientComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 1500
                 });
-
-                // Réinitialisation du formulaire
-                this.editForm.reset();
-
-                // Fermeture du formulaire
-                this.showEditForm = false;
-
-                // Actualisation de la liste des clients
-                this.getAllClient();
               }
+              window.location.reload();
             });
           }
         });
       }
     });
   }
+  
+  
 
   get email() {
     return this.editForm.get('email');
@@ -171,4 +183,6 @@ export class GestionClientComponent implements OnInit {
   toggleEditForm() {
     this.showEditForm = true;
   }
+  
+
 }

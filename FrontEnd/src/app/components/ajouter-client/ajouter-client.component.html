@@ -1,6 +1,6 @@
 <body>
     <section class="container">
-        <header>Edit Client</header>
+        <header>Ajouter Client</header>
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="form">
             <div class="input-box">
                 <label for="cin">CIN</label>
@@ -41,7 +41,7 @@
                     class="form-text text-danger">Please enter phone number</div>
             </div>
 
-            <button type="submit" [disabled]="!editForm.valid" class="btn btn-main mt-3 btn-block">Update
+            <button type="submit" [disabled]="!editForm.valid" class="btn btn-main mt-3 btn-block">Ajouter
                 client</button>
         </form>
     </section>

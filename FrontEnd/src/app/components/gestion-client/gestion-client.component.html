@@ -1,1 +1,101 @@
-<h1>gestion client : afficher clients / update / delete / add</h1>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<section style="margin-bottom: 300px;" class="section products-main">
+    <div class="container" style="margin-bottom: 80px;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="title text-center">
+                    <h2 class="title">All clients</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <ng-container *ngFor="let c of clients; let i = index">
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <img [src]="'../../../assets/images/avatar-' + (i % 2 + 1) + '.png'" style="width: 150px;"
+                            class="card-img-top mx-auto d-block" alt="Client Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ c.firstName }} {{ c.lastName }}</h5>
+                            <p class="card-text">CIN: {{ c.cin }}</p>
+                            <p class="card-text">Email: {{ c.email }}</p>
+                            <p class="card-text">Phone: {{ c.phoneNumber }}</p>
+                            <div class="d-flex justify-content-center">
+                                <button routerLink="/editclient/{{ c.id }}" type="button" class="btn btn-primary"><i
+                                        class="fas fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger ml-2" (click)="onDelete(c.id)"><i
+                                        class="fas fa-trash-alt"></i></button>
+                                <button type="button" class="btn btn-success ml-2"
+                                    routerLink="/client-details/{{c.id}}"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-3" *ngIf="!showEditForm">
+        <div class="col-lg-8 text-center">
+            <button type="button" class="btn btn-primary add" (click)="openModal()">Add new client</button>
+
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <div class="container">
+                <!-- Contenu de votre formulaire -->
+                <div class="login-form border p-5">
+                    <h2 class="mb-2">Add client</h2>
+                    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label for="cin">CIN</label>
+                            <input type="text" id="cin" class="form-control" placeholder="Enter CIN"
+                                formControlName="cin">
+                            <div *ngIf="editForm.get('cin')?.invalid && editForm.get('cin')?.touched"
+                                class="form-text text-danger">Please enter a valid CIN</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter email address"
+                                formControlName="email">
+                            <div *ngIf="editForm.get('email')?.invalid && editForm.get('email')?.touched"
+                                class="form-text text-danger">Please enter a valid email address</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstname">Firstname</label>
+                            <input type="text" id="firstname" class="form-control" placeholder="Enter first name"
+                                formControlName="firstname">
+                            <div *ngIf="editForm.get('firstname')?.invalid && editForm.get('firstname')?.touched"
+                                class="form-text text-danger">Please enter first name</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname">Lastname</label>
+                            <input type="text" id="lastname" class="form-control" placeholder="Enter last name"
+                                formControlName="lastname">
+                            <div *ngIf="editForm.get('lastname')?.invalid && editForm.get('lastname')?.touched"
+                                class="form-text text-danger">Please enter last name</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" id="phone" class="form-control" placeholder="Enter phone number"
+                                formControlName="phone">
+                            <div *ngIf="editForm.get('phone')?.invalid && editForm.get('phone')?.touched"
+                                class="form-text text-danger">Please enter phone number</div>
+                        </div>
+
+                        <button type="submit" [disabled]="!editForm.valid" class="btn btn-main mt-3 btn-block">Add
+                            client</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

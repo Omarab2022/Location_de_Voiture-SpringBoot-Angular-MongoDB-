@@ -4,15 +4,15 @@
       <div class="form">
         <div class="text-center heading">
           <div class="text">
-            <h1>Login</h1>
+            <h1 style="color: rgb(255, 89, 0);">Login</h1>
           </div>
         </div>
 
         <form (ngSubmit)="loginForm.valid && validateUser(loginForm)" #loginForm="ngForm">
           <div class="input-box">
-            <span>Enter username</span>
-            <input style="background-color: rgba(255, 132, 0, 0.529);height: 50px; text-align: center;
-            color: aliceblue;border-radius: 10px;width: 350px;" type="email" name="email" id="email"
+            <span style="color: rgb(126, 126, 126);">Enter username</span>
+            <input style="background-color: rgba(255, 132, 0, 0.215);height: 50px; text-align: center;
+            color: aliceblue;border-radius: 10px;width: 390px;" type="email" name="email" id="email"
               placeholder="Email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="model.email"
               #email="ngModel" class="form-control" />
             <span class="text-danger" *ngIf="(email.touched || loginForm.submitted) &&
@@ -21,9 +21,9 @@
                           email.errors?.['pattern']">Error : Please provide a valid email address !</span>
           </div>
           <div class="input-box">
-            <span>Enter Password</span>
-            <input style="background-color: rgba(255, 132, 0, 0.529);height: 50px; text-align: center;
-            color: aliceblue;border-radius: 10px;width: 350px;" type="password" name="password" placeholder="Password"
+            <span style="color: rgb(126, 126, 126);">Enter Password</span>
+            <input style="background-color: rgba(255, 132, 0, 0.209);height: 50px; text-align: center;
+            color: aliceblue;border-radius: 10px;width: 390px;" type="password" name="password" placeholder="Password"
               id="password" required [(ngModel)]="model.motDePasse" #password="ngModel" minlength="5"
               class="form-control" />
             <span class="text-danger" *ngIf="(password.touched || loginForm.submitted) &&
@@ -32,8 +32,8 @@
                           password.errors?.['minlength']">Error : Password must be at least 5 characters long. !</span>
           </div>
 
-          <div class="container-login100-form-btn">
-            <button class="login100-form-btn btn" type="submit">Login</button>
+          <div class="container-login100-form-btn text-center">
+            <button class="login100-form-btn btn text-center" type="submit">Login</button>
           </div>
         </form>
       </div>
