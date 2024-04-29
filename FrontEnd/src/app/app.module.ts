@@ -40,7 +40,7 @@ const routes: Routes = [
 
   { path:"dashboard", component:DashboardComponent,canActivate:[RouterguardGuard]  },
 
-  { path:"login", component:LoginComponent  },
+  { path:"login", component:LoginComponent   },
   { path:"orders", component:OrdersComponent ,canActivate:[RouterguardGuard] },
 
   { path:"gestion-client", component:GestionClientComponent,canActivate:[RouterguardGuard] },
@@ -60,7 +60,7 @@ const routes: Routes = [
   { path:"AjouterManagerAdmin", component:AjouterManagerAdminComponent,canActivate:[RouterguardGuard] },
   {path: "logout", component: LogoutComponent},
   { path:"editclient/:id", component:FormEditComponent,canActivate:[RouterguardGuard] },
-  { path:"ajouterclient", component:AjouterClientComponent,canActivate:[RouterguardGuard] },
+  { path:"ajouterclient", component:AjouterClientComponent },
 
 
   //{ path:"**", redirectTo:"/login", pathMatch:"full"}

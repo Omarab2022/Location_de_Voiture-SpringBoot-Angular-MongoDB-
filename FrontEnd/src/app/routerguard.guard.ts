@@ -16,7 +16,7 @@ export class RouterguardGuard implements CanActivate {
     canActivate(): boolean {
         let user = JSON.parse(sessionStorage.getItem('userdetails') || '{}');
         if (!user || !user.email) {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/ajouterclient']);
             return false;
         }
         return true;

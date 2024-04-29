@@ -26,7 +26,7 @@ export class LogoutComponent implements OnInit {
     }).then(() =>{
       window.sessionStorage.setItem("userdetails","");
       window.sessionStorage.setItem("XSRF-TOKEN","");
-      this.router.navigate(['/login']);
+      this.router.navigate(['/ajouterclient']);
     })
     // window.sessionStorage.setItem("userdetails","");
     // window.sessionStorage.setItem("XSRF-TOKEN","");

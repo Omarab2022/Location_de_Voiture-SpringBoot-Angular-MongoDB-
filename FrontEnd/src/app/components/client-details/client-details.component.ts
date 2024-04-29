@@ -1,4 +1,4 @@
-import { Client, Review } from './../../entities/client';
+import { Client }  from './../../entities/client';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -14,7 +14,7 @@ export class ClientDetailsComponent implements OnInit {
   constructor(private fb: FormBuilder,private clientService: ClientService, private router: Router,private httpClient:HttpClient,private route: ActivatedRoute) { }
 
   c: Client = new Client();
-  review:Review[]=new Array();
+  
   number: number = 0;
   ngOnInit(): void {
     this.route.params.subscribe(params => {

@@ -9,12 +9,7 @@ export class Client {
     phoneNumber!: string
   }
   
-  export class Review {
-    id!: string
-    comment!: string
-    rating!: number
-    user!: User
-  }
+ 
   export class User {
     id!: string
     lastName!: string
