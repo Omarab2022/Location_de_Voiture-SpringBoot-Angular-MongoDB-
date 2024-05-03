@@ -646,3 +646,16 @@ body {
     }
 
 }
+
+
+.no-orders {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    background-color: #018415;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}

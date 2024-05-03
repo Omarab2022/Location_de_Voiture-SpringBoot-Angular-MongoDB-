@@ -41,11 +41,11 @@ export class HomeComponent implements OnInit {
   slideConfig = {"slidesToShow": 1, "slidesToScroll": 1} ;
   ngOnInit(): void {
     this.getAllOrdersAccepted();
-    // this.getAllClient();
+    this.getAllClient();
     this.loadCars();
     this.getAllUsers();
     this.renderChart1();
-    //this.getNumberOfCars();
+   
     
     this.carService.getData().subscribe({
       next: (data) => {
@@ -149,12 +149,12 @@ export class HomeComponent implements OnInit {
   }
 
 
-  // getAllClient(): void {
-  //   this.clientService.getAllClient().subscribe((clients) => {
-  //     this.clients = clients;
-  //     this.nbClient! = this.clients.length;
-  //   });
-  // }
+  getAllClient(): void {
+    this.clientService.getAllClient().subscribe((clients) => {
+      this.clients = clients;
+      this.nbClient! = this.clients.length;
+    });
+  }
 
 
   loadCars():void {

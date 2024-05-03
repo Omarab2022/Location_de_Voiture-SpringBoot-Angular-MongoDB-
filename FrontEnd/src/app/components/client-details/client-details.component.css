@@ -2,7 +2,7 @@
     width: 1900px;
     height: 89vh;
     border-radius: 30px;
-    background-color: #e8681e;
+    background-color: #ffc9ae;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,16 +18,16 @@
     color: #afafaf;
     text-align: center;
     padding: 35px 0;
-    background-color: #a43013c1;
+    background-color: #000000c1;
     border-radius: 25px;
-    box-shadow: 2px 4px 30px #ffb6b6;
+
     /* backdrop-filter: blur(5px); = to make the background directly underneath the card blurry (useful when it's a transparent/ glassmorphism card */
 }
 
 .card .hero img {
     width: 140px;
     border-radius: 50%;
-    border: 2px solid #f6a05e;
+    border: 2px solid #ff6f00;
     padding: 5px;
 }
 

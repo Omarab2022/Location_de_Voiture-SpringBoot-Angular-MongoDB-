@@ -43,54 +43,78 @@ export class OrdersComponent implements OnInit {
   }
 
   acceptOrder(order: Order) {
-    order.state = Statu.Accepte;
-    this.orderService
-      .acceptOrder(order)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('HTTP Error:', error.status, error.statusText);
-          if (error.status == 200) {
-            this.generateInvoice(order); // Générer la facture PDF
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Order accepted successfully',
-              showConfirmButton: false,
-              timer: 1500,
-            });
+    Swal.fire({
+      title: 'Accept Order',
+      text: 'Are you sure you want to accept this order?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Accept',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        order.state = Statu.Accepte;
+        this.orderService.acceptOrder(order)
+          .pipe(
+            catchError((error: HttpErrorResponse) => {
+              console.error('HTTP Error:', error.status, error.statusText);
+              if (error.status == 200) {
+                this.generateInvoice(order); // Générer la facture PDF
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Order accepted successfully',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                this.getAllOrdersInHold();
+              }
+              return of(null); // Retourne un observable vide
+            })
+          )
+          .subscribe(() => {
             this.getAllOrdersInHold();
-          }
-          return of(null); // Retourne un observable vide
-        })
-      )
-      .subscribe(() => {
-        this.getAllOrdersInHold();
-      });
+          });
+      }
+    });
   }
 
+  
+
   refuseOrder(order: Order) {
-    order.state = Statu.Refuse;
-    this.orderService
-      .acceptOrder(order)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('HTTP Error:', error.status, error.statusText);
-          if (error.status == 200) {
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Order refused successfully',
-              showConfirmButton: false,
-              timer: 1500,
-            });
+    Swal.fire({
+      title: 'Refuse Order',
+      text: 'Are you sure you want to refuse this order?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Refuse',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        order.state = Statu.Refuse;
+        this.orderService.acceptOrder(order)
+          .pipe(
+            catchError((error: HttpErrorResponse) => {
+              console.error('HTTP Error:', error.status, error.statusText);
+              if (error.status == 200) {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Order refused successfully',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                this.getAllOrdersInHold();
+              }
+              return of(null); // Retourne un observable vide
+            })
+          )
+          .subscribe(() => {
             this.getAllOrdersInHold();
-          }
-          return of(null); // Retourne un observable vide
-        })
-      )
-      .subscribe(() => {
-        this.getAllOrdersInHold();
-      });
+          });
+      }
+    });
   }
 
   generateInvoice(order: Order) {

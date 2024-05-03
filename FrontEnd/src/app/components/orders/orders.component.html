@@ -36,6 +36,8 @@
             </div>
 
 
+
+
             <!-- End of Insights -->
 
             <div class="bottom-data">
@@ -100,9 +102,19 @@
                                         </button>
                                     </td>
 
+
                                 </tr>
                             </tbody>
                         </table>
+
+                        <div class="bottom-data">
+                            <div class="orders">
+                                <div *ngIf="!orders || orders.length === 0" class="no-orders">No orders</div>
+                                <div *ngIf="orders && orders.length > 0" class="table-responsive">
+                                    <!-- Table content -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 

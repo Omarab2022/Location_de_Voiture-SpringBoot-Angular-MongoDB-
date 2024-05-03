@@ -88,11 +88,18 @@
                         </table>
                     </div>
 
-                    <div *ngIf="orders!.length == 0" class="alert alert-info" role="alert">
-                        No orders accepted yet
+                    <div class="bottom-data">
+                        <div class="orders">
+                            <div *ngIf="!orders || orders.length === 0" class="no-orders">No Refused orders</div>
+                            <div *ngIf="orders && orders.length > 0" class="table-responsive">
+                                <!-- Table content -->
+                            </div>
+                        </div>
                     </div>
 
                 </div>
+
+
 
 
             </div>

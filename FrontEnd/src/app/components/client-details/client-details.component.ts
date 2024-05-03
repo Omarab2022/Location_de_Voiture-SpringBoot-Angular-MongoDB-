@@ -5,6 +5,9 @@ import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 
+// Import SweetAlert
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-client-details',
   templateUrl: './client-details.component.html',
@@ -28,7 +31,6 @@ export class ClientDetailsComponent implements OnInit {
     this.clientService.getOneClient(id).subscribe((client) => {
       console.log(client);
       this.c = client;
-     
     });
   }
 
@@ -36,6 +38,16 @@ export class ClientDetailsComponent implements OnInit {
     return Array(count).fill(0).map((_, index) => index + 1);
   }
   
-
-  
+  makeOrder() {
+    if (!this.c) {
+      // Afficher la pop-up si le client n'est pas trouvé
+      Swal.fire({
+        icon: 'error',
+        title: 'Client non trouvé',
+        text: 'Aucun client trouvé avec ce CIN',
+      });
+      return;
+    }
+    // Autre logique pour créer la commande
+  }
 }

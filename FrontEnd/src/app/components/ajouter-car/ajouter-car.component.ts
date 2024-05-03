@@ -101,49 +101,53 @@ export class AjouterCarComponent implements OnInit {
         console.log(response);
         this.submitted = true;
         this.car = {
-          id:'',
+          id: '',
           model: '',
           brand: '',
           description: '',
           pricePerDay: 0,
           available: false,
-          image:'',
+          image: '',
           start_Date: new Date(),
           end_Date: new Date()
         };
-        this.loadCars(); 
-        this.closeModal(); 
+        this.loadCars();
+        this.closeModal();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Car Ajouter avec Succee!',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
-      error : (error) => {
+      error: (error) => {
         console.error(error);
-        if(error.status == 200){
+        if (error.status == 200) {
           Swal.fire({
             position: 'center',
             icon: 'success',
             title: 'Car added!',
             showConfirmButton: false,
-            timer: 1500,
+            timer: 1500
           }).then(() => {
             window.location.reload();
-          }
-          );
+          });
         }
       }
-
-    }
-    );
+    });
   }
+
   closeModal() {
-   
     this.submitted = false;
     this.car = {
-      id:'',
+      id: '',
       model: '',
       brand: '',
       description: '',
       pricePerDay: 0,
       available: false,
-      image:'',
+      image: '',
       start_Date: new Date(),
       end_Date: new Date()
     };
@@ -153,16 +157,17 @@ export class AjouterCarComponent implements OnInit {
       modal.setAttribute('aria-hidden', 'true');
     }
   }
+
   loadCars() {
     this.carService.getAllCars()
       .subscribe({
-        next : (data)=>{
-          this.cars=data;
+        next: (data) => {
+          this.cars = data;
         },
-        error : (err)=>{}
+        error: (err) => { }
       });
   }
-  
+
   
   updateCar(): void {
     console.log(this.car);

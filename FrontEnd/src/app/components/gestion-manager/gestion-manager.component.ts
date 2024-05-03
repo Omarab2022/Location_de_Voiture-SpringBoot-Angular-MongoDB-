@@ -74,15 +74,26 @@ export class GestionManagerComponent implements OnInit {
 
 
   onDelete(id: string) {
-    this.adminService.deleteUser(id).subscribe(() => {
-      this.getAllUsers();
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'User deleted successfully',
-        showConfirmButton: false,
-        timer: 1500
-      });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this user!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adminService.deleteUser(id).subscribe(() => {
+          this.getAllUsers();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'User deleted successfully',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        });
+      }
     });
   }
 

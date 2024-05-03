@@ -46,38 +46,48 @@ export class CarsComponent implements OnInit {
     this.loadCars();
   }
 
-  deleteCar(id:String):void{
-    this.carService.delete(id).subscribe({
-      next: (res) => {
-        console.log(id);
-        console.log(res);
-        //this.router.navigate(['/car/findAllCars']);
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Car deleted!',
-          showConfirmButton: false,
-          timer: 1500,
-        }).then(() => {
-          window.location.reload();
-        }
-        );
-      },
-      error: (e) => {
-        if(e.status == 200){
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Car deleted!',
-            showConfirmButton: false,
-            timer: 1500,
-          }).then(() => {
-            window.location.reload();
+  
+
+  deleteCar(id: string): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this car!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.carService.delete(id).subscribe({
+          next: (res) => {
+            console.log(res);
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Car deleted!',
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(() => {
+              window.location.reload();
+            });
+          },
+          error: (e) => {
+            if (e.status == 200) {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Car deleted!',
+                showConfirmButton: false,
+                timer: 1500,
+              }).then(() => {
+                window.location.reload();
+              });
+            }
+            console.error(e);
+            console.log(id);
           }
-          );
-        }
-        console.error(e);
-        console.log(id);
+        });
       }
     });
   }
