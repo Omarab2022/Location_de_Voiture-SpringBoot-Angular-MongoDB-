@@ -32,19 +32,43 @@ export class CarDetaiComponent implements OnInit {
       error : (err)=>{}
     });
   }
-  searchClient(): void {
-    this.carService.getClientByCIN(this.cin).subscribe({
-      next: (data) => {
-        this.client = data;
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
-  }
 
-   // Suppose you have car object defined here
   showForm: boolean = false; // Initialize showForm variable
+clientAvailable: boolean = false; // Initialize client availability variable
+
+
+
+searchClient(): void {
+  if (this.cin) {
+      this.carService.getClientByCIN(this.cin).subscribe({
+          next: (data) => {
+              this.client = data;
+              if (!this.client) {
+                  // Client not available, show popup
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Client not available',
+                      text: 'The client with the provided CIN is not available.'
+                  });
+              } else {
+                  this.clientAvailable = true;
+              }
+          },
+          error: (err) => {
+              console.error(err);
+          }
+      });
+  } else {
+      // Cin not provided, show error message
+      Swal.fire({
+          icon: 'error',
+          title: 'CIN is required',
+          text: 'Please enter the CIN of the client.'
+      });
+  }
+}
+
+
 
   // Function to show the reservation form
   showReservationForm() {

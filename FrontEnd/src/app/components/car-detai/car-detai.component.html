@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
 <body>
 
     <div class="card-wrapper">
@@ -35,28 +38,28 @@
     <!-- Reservation Form -->
     <div *ngIf="showForm" class="reservation-form">
         <div class="form-container">
+            <button type="button" class="btn btn-close" (click)="hideReservationForm()">
+                <i class="fas fa-times"></i>
+            </button>
             <form #reservationForm="ngForm" (ngSubmit)="makeOrder()">
                 <div class="form-group">
                     <label class="form-label" for="cin">Svp Entrer CIN de Client</label>
-                    <input type="text" class="form-control" id="cin" required [(ngModel)]="cin" name="cin"
-                        (ngModelChange)="searchClient()">
+                    <input type="text" class="form-control" id="cin" required [(ngModel)]="cin" name="cin">
+                    <button type="button" class="btn btn-primary" (click)="searchClient()">Rechercher</button>
                 </div>
                 <div *ngIf="client" class="client-info">
                     <div class="client-image">
                         <img src="../../../assets/images/avatar-1.png" alt="Photo du client">
                     </div>
                     <div class="client-details">
-
                         <h3>Nom: {{client.lastName}}</h3>
                         <h3>Prenom: {{client.firstName}}</h3>
-
                     </div>
+                    <button type="submit" class="btn btn-primary" *ngIf="client">Submit</button>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-secondary" (click)="hideReservationForm()">Close</button>
             </form>
         </div>
     </div>
+
 
 </body>
