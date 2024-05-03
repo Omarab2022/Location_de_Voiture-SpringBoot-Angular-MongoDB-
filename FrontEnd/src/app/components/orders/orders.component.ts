@@ -125,25 +125,25 @@ export class OrdersComponent implements OnInit {
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
 
-    // Couleur pour le titre
-    doc.setTextColor(0, 0, 255); // Bleu
-    doc.setFillColor(255, 255, 255); // Blanc
+    // Ajouter le logo de l'entreprise
+    const logo = new Image();
+    logo.src = '../../../assets/images/jeep.jpeg';
+    doc.addImage(logo, 'PNG', 15, 10, 30, 20);
 
     // Définir le titre de la facture
     doc.setFontSize(20);
     doc.text('Facture de Location de Voiture', 105, 15, { align: 'center' });
 
-    // Couleur pour le nom de l'entreprise et la date
-    doc.setTextColor(0, 0, 0); // Noir
-
-    // Ajouter le nom de l'entreprise et la date
+    // Ajouter les informations de l'entreprise
     doc.setFontSize(12);
     doc.text('CARDEAL', 105, 25, { align: 'center' });
-    doc.text(`Date: ${new Date().toLocaleDateString()}`, 105, 35, { align: 'center' });
+    doc.text('123 Rue Mohamed 6', 105, 35, { align: 'center' });
+    doc.text('Martil, Tetouan', 105, 45, { align: 'center' });
+    doc.text('Tél: +1234567890', 105, 55, { align: 'center' });
 
-    // Ajouter des bordures pour le titre
+    // Ajouter des bordures pour les informations de l'entreprise
     doc.setLineWidth(0.5);
-    doc.line(15, 45, 195, 45);
+    doc.line(15, 65, 195, 65);
 
     // Ajouter des informations de commande au PDF
     const data = {
@@ -160,12 +160,12 @@ export class OrdersComponent implements OnInit {
     };
 
     // Définir la position initiale du contenu
-    let yPos = 50;
+    let yPos = 75;
 
     // Ajouter une image de voiture
     const img = new Image();
     img.src = `../../../assets/images/${data.image}`;
-    doc.addImage(img, 'JPEG', 20, yPos, 50, 50);
+    doc.addImage(img, 'JPEG', 15, yPos, 60, 60);
 
     // Ajouter des bordures pour le contenu
     doc.rect(15, yPos, 180, 80);
@@ -186,11 +186,25 @@ export class OrdersComponent implements OnInit {
     doc.line(15, yPos, 195, yPos);
 
     // Couleur pour le total
-    doc.setTextColor(255, 0, 0); // Rouge
+    doc.setTextColor(255,86,26); // Noir
 
     // Ajouter le coût total
     yPos += 10;
     doc.text(`Total: ${data.totalCost} Dh`, 150, yPos);
+
+
+    const signature = new Image();
+signature.src = '../../../assets/images/signature.png';
+doc.addImage(signature, 'PNG', 20, yPos + 20, 50, 25); // yPos + 20 pour les aligner sur la même ligne
+
+  // Ajouter le cachet de l'entreprise
+const stamp = new Image();
+stamp.src = '../../../assets/images/cachet.jpeg';
+doc.addImage(stamp, 'PNG', 120, yPos + 20, 30, 30);
+
+// Ajouter une signature
+
+
 
     // Sauvegarder le PDF
     doc.save('Facture_Location_Voiture.pdf');

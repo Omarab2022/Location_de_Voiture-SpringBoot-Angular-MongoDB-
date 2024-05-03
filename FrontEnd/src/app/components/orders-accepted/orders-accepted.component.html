@@ -55,6 +55,8 @@
 
                                     <th class="border-0 font-14 font-weight-medium text-muted text-center">Voir Client
                                     </th>
+                                    <th class="border-0 font-14 font-weight-medium text-muted text-center">Facture
+                                    </th>
 
                                 </tr>
                             </thead>
@@ -80,6 +82,14 @@
                                             class="btn waves-effect waves-light btn-rounded btn-success"
                                             routerLink="/client-details/{{o.client.id}}">
                                             Voir
+                                        </button>
+                                    </td>
+
+                                    <td class="border-top-0 text-center">
+                                        <button style="padding: 5px;width: 100px;" type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-danger"
+                                            (click)="generateInvoice(o)">
+                                            Facture
                                         </button>
                                     </td>
 
