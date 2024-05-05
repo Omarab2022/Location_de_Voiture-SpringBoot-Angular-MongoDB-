@@ -35,7 +35,4 @@ public class User {
         return this.roles;
     }
 
-
-
-
 }
