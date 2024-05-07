@@ -11,10 +11,7 @@ public interface ClientRepo extends MongoRepository<Client, String> {
 
     @Query("{ 'cin' : ?0 }")
     Client findByCin(String cin);
-
-    @Query("{ 'email' : ?0 }")
     boolean existsByEmail(String email);
 
-    @Query("{ 'cin' : ?0 }")
     boolean existsByCin(String cin);
 }
