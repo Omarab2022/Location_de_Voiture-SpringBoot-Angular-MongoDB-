@@ -1,0 +1,234 @@
+[{
+  "_id": {
+    "$oid": "662796b4c9543f4d2e41e52a"
+  },
+  "client": {
+    "$ref": "clients",
+    "$id": {
+      "$oid": "661e835701d4830aa0d03b25"
+    }
+  },
+  "car": {
+    "$ref": "Voiture",
+    "$id": {
+      "$oid": "66265a58fc09b64ecfab5e2a"
+    }
+  },
+  "State": "Refuse",
+  "startDate": {
+    "$date": "2024-04-11T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2024-04-26T23:00:00.000Z"
+  },
+  "totalCost": 6400,
+  "_class": "com.Mongo.LocationVoiture.entity.Order"
+},
+{
+  "_id": {
+    "$oid": "6627a5cbc9543f4d2e41e52b"
+  },
+  "client": {
+    "$ref": "clients",
+    "$id": {
+      "$oid": "661e835701d4830aa0d03b25"
+    }
+  },
+  "car": {
+    "$ref": "Voiture",
+    "$id": {
+      "$oid": "66265a7efc09b64ecfab5e2b"
+    }
+  },
+  "State": "Accepte",
+  "startDate": {
+    "$date": "2024-04-16T23:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2024-04-24T23:00:00.000Z"
+  },
+  "totalCost": 5600,
+  "_class": "com.Mongo.LocationVoiture.entity.Order"
+},
+{
+  "_id": {
+    "$oid": "6627a5d8c9543f4d2e41e52c"
+  },
+  "client": {
+    "$ref": "clients",
+    "$id": {
+      "$oid": "661e835701d4830aa0d03b25"
+    }
+  },
+  "car": {
+    "$ref": "Voiture",
+    "$id": {
+      "$oid": "66265992fc09b64ecfab5e27"
+    }
+  },
+  "State": "EnAttente",
+  "startDate": {
+    "$date": "2024-04-11T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2024-04-19T23:00:00.000Z"
+  },
+  "totalCost": 9000,
+  "_class": "com.Mongo.LocationVoiture.entity.Order"
+},
+{
+  "_id": {
+    "$oid": "662f958a233f226d83f06247"
+  },
+  "client": {
+    "$ref": "clients",
+    "$id": {
+      "$oid": "661e835701d4830aa0d03b25"
+    }
+  },
+  "car": {
+    "$ref": "Voiture",
+    "$id": {
+      "$oid": "66265a58fc09b64ecfab5e2a"
+    }
+  },
+  "State": "EnAttente",
+  "startDate": {
+    "$date": "2024-04-02T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2024-04-26T23:00:00.000Z"
+  },
+  "totalCost": 10000,
+  "_class": "com.Mongo.LocationVoiture.entity.Order"
+},
+{
+  "_id": {
+    "$oid": "662fba73314f594df0d8658c"
+  },
+  "client": {
+    "$ref": "clients",
+    "$id": {
+      "$oid": "662f9505233f226d83f06246"
+    }
+  },
+  "car": {
+    "$ref": "Voiture",
+    "$id": {
+      "$oid": "6627c0ccde002b372ffd02ed"
+    }
+  },
+  "State": "Accepte",
+  "startDate": {
+    "$date": "2024-04-01T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2024-05-10T23:00:00.000Z"
+  },
+  "totalCost": 14000,
+  "_class": "com.Mongo.LocationVoiture.entity.Order"
+},
+{
+  "_id": {
+    "$oid": "6634ca509490bd1eaff1ebe3"
+  },
+  "client": {
+    "$ref": "clients",
+    "$id": {
+      "$oid": "662f9505233f226d83f06246"
+    }
+  },
+  "car": {
+    "$ref": "Voiture",
+    "$id": {
+      "$oid": "66265a58fc09b64ecfab5e2a"
+    }
+  },
+  "State": "Accepte",
+  "startDate": {
+    "$date": "2024-05-02T23:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2024-05-30T23:00:00.000Z"
+  },
+  "totalCost": 11200,
+  "_class": "com.Mongo.LocationVoiture.entity.Order"
+},
+{
+  "_id": {
+    "$oid": "6634fe511104573a766b0f4d"
+  },
+  "client": {
+    "$ref": "clients",
+    "$id": {
+      "$oid": "661e835701d4830aa0d03b25"
+    }
+  },
+  "car": {
+    "$ref": "Voiture",
+    "$id": {
+      "$oid": "6627c032de002b372ffd02e8"
+    }
+  },
+  "State": "Accepte",
+  "startDate": {
+    "$date": "2024-05-01T23:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2024-05-24T23:00:00.000Z"
+  },
+  "totalCost": 11500,
+  "_class": "com.Mongo.LocationVoiture.entity.Order"
+},
+{
+  "_id": {
+    "$oid": "66360802092ef56a018b406c"
+  },
+  "client": {
+    "$ref": "clients",
+    "$id": {
+      "$oid": "661e835701d4830aa0d03b25"
+    }
+  },
+  "car": {
+    "$ref": "Voiture",
+    "$id": {
+      "$oid": "66265a58fc09b64ecfab5e2a"
+    }
+  },
+  "State": "EnAttente",
+  "startDate": {
+    "$date": "2024-04-30T23:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2024-05-24T23:00:00.000Z"
+  },
+  "totalCost": 9600,
+  "_class": "com.Mongo.LocationVoiture.entity.Order"
+},
+{
+  "_id": {
+    "$oid": "6639f22c46c353257aba496f"
+  },
+  "client": {
+    "$ref": "clients",
+    "$id": {
+      "$oid": "661e835701d4830aa0d03b25"
+    }
+  },
+  "car": {
+    "$ref": "Voiture",
+    "$id": {
+      "$oid": "6627c032de002b372ffd02e8"
+    }
+  },
+  "State": "EnAttente",
+  "startDate": {
+    "$date": "2024-05-07T23:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2024-05-31T23:00:00.000Z"
+  },
+  "totalCost": 12000,
+  "_class": "com.Mongo.LocationVoiture.entity.Order"
+}]

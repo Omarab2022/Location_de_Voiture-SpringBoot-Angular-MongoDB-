@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "661e835701d4830aa0d03b25"
+  },
+  "cin": "LE29328",
+  "lastName": "abarra",
+  "FirstName": "Omar",
+  "PhoneNumber": "0698609903",
+  "email": "abarraomar@gmail.com",
+  "_class": "com.Mongo.LocationVoiture.entity.Client"
+},
+{
+  "_id": {
+    "$oid": "662f9505233f226d83f06246"
+  },
+  "cin": "V331498",
+  "lastName": "abarra",
+  "FirstName": "khalid",
+  "PhoneNumber": "73737373",
+  "email": "khalid@gmail.com",
+  "_class": "com.Mongo.LocationVoiture.entity.Client"
+}]

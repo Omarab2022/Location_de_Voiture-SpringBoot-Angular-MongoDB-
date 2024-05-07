@@ -90,8 +90,8 @@ public class CarController {
 		return "Car with id :"+id+" is deleted";
 	}
 	@PatchMapping("/updateCar/{id}")
-	public String updateManager(@PathVariable("id") String id, @RequestBody Car updatedCar) {
-		Car existingCar = mongoTemplate.findById(id, Car.class);
+	public String updateCar(@PathVariable("id") String id, @RequestBody Car updatedCar) {
+		Car existingCar = carRepo.findCarById(id);
 		if (existingCar != null) {
 			existingCar.setModel(updatedCar.getModel());
 			existingCar.setBrand(updatedCar.getBrand());
@@ -100,7 +100,7 @@ public class CarController {
 			existingCar.setPricePerDay(updatedCar.getPricePerDay());
 			existingCar.setStart_Date(updatedCar.getStart_Date());
 			existingCar.setEnd_Date(updatedCar.getEnd_Date());
-			mongoTemplate.save(existingCar);
+			carRepo.save(existingCar);
 			return "Updated Car with id: " + existingCar.getId();
 		} else {
 			return "Car not found";

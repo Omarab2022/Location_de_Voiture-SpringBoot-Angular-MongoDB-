@@ -11,6 +11,11 @@ import java.util.List;
 @Repository
 public interface CarRepo extends MongoRepository<Car,String> {
 
+	@Query("{'_id' : ?0}")
+	Car findCarById(String id);
+
+	@Query("{'_id' : ?0}")
+	void updateCar(String id, Car updatedCar);
 
 
 	@Query("{ 'end_Date' : { $gte: ?0 }, 'start_Date' : { $lte: ?1 }, 'available' : true }")

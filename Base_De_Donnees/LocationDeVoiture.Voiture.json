@@ -1,0 +1,162 @@
+[{
+  "_id": {
+    "$oid": "66265992fc09b64ecfab5e27"
+  },
+  "model": "2015",
+  "brand": "Toyota",
+  "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur\n                        placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!",
+  "pricePerDay": 1000,
+  "available": true,
+  "image": "FordFusion.jpg",
+  "start_Date": {
+    "$date": "2024-04-04T00:00:00.000Z"
+  },
+  "end_Date": {
+    "$date": "2024-05-05T00:00:00.000Z"
+  },
+  "_class": "com.Mongo.LocationVoiture.entity.Car"
+},
+{
+  "_id": {
+    "$oid": "66265a58fc09b64ecfab5e2a"
+  },
+  "model": "2022",
+  "brand": "VolsVagen",
+  "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur\n                        placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!",
+  "pricePerDay": 400,
+  "available": true,
+  "image": "HondaCivic.jpg",
+  "start_Date": {
+    "$date": "2024-04-01T00:00:00.000Z"
+  },
+  "end_Date": {
+    "$date": "2024-05-04T00:00:00.000Z"
+  },
+  "_class": "com.Mongo.LocationVoiture.entity.Car"
+},
+{
+  "_id": {
+    "$oid": "66265a7efc09b64ecfab5e2b"
+  },
+  "model": "2025",
+  "brand": "Bnetli",
+  "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur\n                        placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!",
+  "pricePerDay": 700,
+  "available": true,
+  "image": "ToyotaCorrola.jpg",
+  "start_Date": {
+    "$date": "2024-04-02T00:00:00.000Z"
+  },
+  "end_Date": {
+    "$date": "2024-05-12T00:00:00.000Z"
+  },
+  "_class": "com.Mongo.LocationVoiture.entity.Car"
+},
+{
+  "_id": {
+    "$oid": "6627c032de002b372ffd02e8"
+  },
+  "model": "2024",
+  "brand": "Ferrari",
+  "description": "Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!",
+  "pricePerDay": 500,
+  "available": true,
+  "image": "ferrari.jpeg",
+  "start_Date": {
+    "$date": "2024-05-01T00:00:00.000Z"
+  },
+  "end_Date": {
+    "$date": "2024-05-30T00:00:00.000Z"
+  },
+  "_class": "com.Mongo.LocationVoiture.entity.Car"
+},
+{
+  "_id": {
+    "$oid": "6627c047de002b372ffd02e9"
+  },
+  "model": "2024",
+  "brand": "Ford",
+  "description": "Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!",
+  "pricePerDay": 200,
+  "available": true,
+  "image": "ford.avif",
+  "start_Date": {
+    "$date": "2024-04-04T00:00:00.000Z"
+  },
+  "end_Date": {
+    "$date": "2024-04-19T00:00:00.000Z"
+  },
+  "_class": "com.Mongo.LocationVoiture.entity.Car"
+},
+{
+  "_id": {
+    "$oid": "6627c06fde002b372ffd02ea"
+  },
+  "model": "2022",
+  "brand": "Bmw",
+  "description": "Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!",
+  "pricePerDay": 300,
+  "available": true,
+  "image": "images_list-r4x3w1000-63b58ec8bbb47-p90403971-highres-the-new-bmw-520e-sed.jpg",
+  "start_Date": {
+    "$date": "2024-05-01T00:00:00.000Z"
+  },
+  "end_Date": {
+    "$date": "2024-05-31T00:00:00.000Z"
+  },
+  "_class": "com.Mongo.LocationVoiture.entity.Car"
+},
+{
+  "_id": {
+    "$oid": "6627c0a5de002b372ffd02ec"
+  },
+  "model": "2024",
+  "brand": "Jeep",
+  "description": "Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!",
+  "pricePerDay": 250,
+  "available": true,
+  "image": "jeeb.jpeg",
+  "start_Date": {
+    "$date": "2024-05-03T00:00:00.000Z"
+  },
+  "end_Date": {
+    "$date": "2024-05-17T00:00:00.000Z"
+  },
+  "_class": "com.Mongo.LocationVoiture.entity.Car"
+},
+{
+  "_id": {
+    "$oid": "6627c0ccde002b372ffd02ed"
+  },
+  "model": "2022",
+  "brand": "bmw",
+  "description": "Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!",
+  "pricePerDay": 332,
+  "available": true,
+  "image": "pejot.jpeg",
+  "start_Date": {
+    "$date": "2024-05-02T00:00:00.000Z"
+  },
+  "end_Date": {
+    "$date": "2024-05-24T00:00:00.000Z"
+  },
+  "_class": "com.Mongo.LocationVoiture.entity.Car"
+},
+{
+  "_id": {
+    "$oid": "66393ee03f5e2d0bc254430a"
+  },
+  "model": "2023",
+  "brand": "Mercides Benz",
+  "description": "Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!",
+  "pricePerDay": 222,
+  "available": true,
+  "image": "car-5.jpg",
+  "start_Date": {
+    "$date": "2024-05-03T00:00:00.000Z"
+  },
+  "end_Date": {
+    "$date": "2024-05-26T00:00:00.000Z"
+  },
+  "_class": "com.Mongo.LocationVoiture.entity.Car"
+}]

@@ -1,0 +1,44 @@
+[{
+  "_id": {
+    "$oid": "6624f13294508898602311e9"
+  },
+  "lastName": "abarra",
+  "firstName": "ayoub",
+  "address": "TANGER",
+  "email": "omar@gmail.com",
+  "motDePasse": "20012001",
+  "role": "MANAGER",
+  "roles": [
+    "MANAGER"
+  ],
+  "PhoneNumber": "0987654321"
+},
+{
+  "_id": {
+    "$oid": "6624f14094508898602311ed"
+  },
+  "lastName": "Jmal",
+  "firstName": "debouz",
+  "address": "Adresse",
+  "email": "anas@gmail.com",
+  "motDePasse": "anas2001",
+  "role": "ADMINISTRATEUR",
+  "roles": [
+    "ADMINISTRATEUR"
+  ],
+  "PhoneNumber": "0123456789"
+},
+{
+  "_id": {
+    "$oid": "6634cb5a9490bd1eaff1ebe4"
+  },
+  "lastName": "bens v20",
+  "firstName": "hanan",
+  "address": "hay diza",
+  "email": "omarabara2014@hotmail.com",
+  "PhoneNumber": "99403033",
+  "motDePasse": "20012001",
+  "role": "MANAGER",
+  "roles": [],
+  "_class": "com.Mongo.LocationVoiture.entity.User"
+}]
