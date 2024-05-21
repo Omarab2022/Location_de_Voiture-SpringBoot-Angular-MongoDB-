@@ -26,6 +26,4 @@ public class Car {
     private Date end_Date;
 
 
-    ////////////////////
-
 }

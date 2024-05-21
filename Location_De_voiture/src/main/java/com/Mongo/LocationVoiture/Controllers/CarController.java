@@ -116,7 +116,7 @@ public class CarController {
 	public String updateIsAvailable(@PathVariable String id) {
 		Query query = new Query(Criteria.where("_id").is(id));
 		Car car=carRepo.findById(id).get();
-		Update update = new Update().set("a vailable", !car.isAvailable());
+		Update update = new Update().set("available", !car.isAvailable());
 		mongoTemplate.updateFirst(query, update, Car.class);
 		return "Car availability updated for car with id: " + id;
 	}
@@ -127,10 +127,13 @@ public class CarController {
 	                                @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
 		return carRepo.findByStartOrEndDateAndAvailability(endDate, startDate);
 	}
+
 	@GetMapping("/{id}")
 	public Car getCarById(@PathVariable String id){
 		return carRepo.findById(id).get();
 	}
+
+
 
 	@GetMapping("/available")
 	public Map<String, Integer> getNumberOfAvailableCars(){

@@ -42,6 +42,9 @@ public class OrderController {
 	@PostMapping("/addOrder")
 	public String saveOrder(@RequestBody Order order) {
 		orderRepository.save(order);
+		Car car = carRepository.findById(order.getCar().getId()).orElseThrow(() -> new IllegalArgumentException("Car not found"));
+		car.setAvailable(false); // Marquer la voiture comme indisponible
+		carRepository.save(car);
 		return "Added Order with id : " + order.getId();
 	}
 	@GetMapping("/allOrders")
@@ -67,16 +70,22 @@ public class OrderController {
 
 	@PatchMapping("/updateState/{id}")
 	public String updateState(@PathVariable String id, @RequestBody Order order) {
-		if(order.getState() == Statue.Refuse){
+		Order existingOrder = orderRepository.findById(id).orElse(null);
+		if (existingOrder != null) {
+			existingOrder.setState(order.getState());
+			orderRepository.save(existingOrder);
 
-			Car car = carRepository.findById(order.getCar().getId()).orElseThrow(() -> new IllegalArgumentException("Car not found"));
-			car.setAvailable(true);
+			Car car = carRepository.findById(existingOrder.getCar().getId()).orElseThrow(() -> new IllegalArgumentException("Car not found"));
+			if (order.getState() == Statue.Refuse) {
+				car.setAvailable(true); // Marquer la voiture comme disponible
+			} else if (order.getState() == Statue.Accepte) {
+				car.setAvailable(false); // Marquer la voiture comme indisponible
+			}
 			carRepository.save(car);
+			return "Order updated";
+		} else {
+			return "Order not found";
 		}
-		Order order1 = orderRepository.findById(id).orElse(null);
-		order1.setState(order.getState());
-		orderRepository.save(order1);
-		return "Order updated";
 	}
 	@GetMapping("/ClientOrders/{id}")
 
